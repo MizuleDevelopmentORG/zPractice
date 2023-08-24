@@ -1,0 +1,12 @@
+license: ""
+
+selector:
+  item: ""
+  enchantments:
+  name: ""
+  lore:
+    - ""
+    - ""
+    - ""
+  slot: 1
+  amount: 1
