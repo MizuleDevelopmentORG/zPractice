@@ -1,5 +1,8 @@
 license: ""
 
+mongo:
+  uri: "mongodb://158.69.163.121:42741/"
+
 selector:
   item: ""
   enchantments:

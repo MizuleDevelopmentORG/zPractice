@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.1.0"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = 'com'
@@ -21,7 +22,6 @@ repositories {
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT"
     compileOnly "io.github.miniplaceholders:miniplaceholders-api:2.1.0"
-    compileOnly "mongo-driver-3:mongo-driver-3:0.7.0"
     implementation("org.mongodb:mongo-java-driver:3.12.12")
 }
 
