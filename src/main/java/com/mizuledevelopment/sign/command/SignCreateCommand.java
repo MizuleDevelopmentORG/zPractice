@@ -1,5 +1,6 @@
 package com.mizuledevelopment.sign.command;
 
+import com.mizuledevelopment.ZPractice;
 import com.mizuledevelopment.util.command.Command;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -9,6 +10,13 @@ import org.bukkit.entity.Player;
 import java.util.Objects;
 
 public class SignCreateCommand extends Command {
+
+    private final ZPractice plugin;
+
+    public SignCreateCommand(ZPractice plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public void execute(final CommandSender sender, final String[] args) {
         if (!(sender instanceof Player player)) return;

@@ -10,10 +10,12 @@ public class SignHelper {
         document.put("name", dataSign.getName());
         document.put("arena", dataSign.getArena());
         document.put("kit", dataSign.getKit());
+        document.put("location", dataSign.getLocation());
         return document;
     }
 
     public static DataSign from(Document document) {
-        return new DataSign(document.getString("name"), document.getString("arena"), document.getString("kit"));
+        return new DataSign(document.getString("name"), document.getString("arena"), document.getString("kit"),
+                document.getString("location"));
     }
 }

@@ -5,11 +5,13 @@ public class DataSign {
     private String name;
     private String arena;
     private String kit;
+    private String location;
 
-    public DataSign(String name, String arena, String kit) {
+    public DataSign(String name, String arena, String kit, String location) {
         this.name = name;
         this.arena = arena;
         this.kit = kit;
+        this.location = location;
     }
 
     public String getArena() {
@@ -34,5 +36,13 @@ public class DataSign {
 
     public void setName(final String name) {
         this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(final String location) {
+        this.location = location;
     }
 }
