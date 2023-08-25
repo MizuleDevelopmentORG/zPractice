@@ -30,6 +30,7 @@ public class DataSignManager {
         }
     }
 
+    @SuppressWarnings(value = "ALL")
     public void save(){
         dataSigns.forEach(dataSign -> this.plugin.getMongoHandler().getSigns().replaceOne(
                 Filters.eq("name", dataSign.getName()), SignHelper.from(dataSign), new UpdateOptions().upsert(true)));

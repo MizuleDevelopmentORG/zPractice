@@ -11,11 +11,12 @@ public class SignHelper {
         document.put("arena", dataSign.getArena());
         document.put("kit", dataSign.getKit());
         document.put("location", dataSign.getLocation());
+        document.put("players", dataSign.getMaxPlayers());
         return document;
     }
 
     public static DataSign from(Document document) {
         return new DataSign(document.getString("name"), document.getString("arena"), document.getString("kit"),
-                document.getString("location"));
+                document.getString("location"), document.getInteger("players"));
     }
 }
