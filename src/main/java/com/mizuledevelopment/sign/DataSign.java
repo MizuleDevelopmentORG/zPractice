@@ -6,12 +6,14 @@ public class DataSign {
     private String arena;
     private String kit;
     private String location;
+    private int maxPlayers;
 
-    public DataSign(String name, String arena, String kit, String location) {
+    public DataSign(String name, String arena, String kit, String location, int maxPlayers) {
         this.name = name;
         this.arena = arena;
         this.kit = kit;
         this.location = location;
+        this.maxPlayers = maxPlayers;
     }
 
     public String getArena() {
@@ -44,5 +46,13 @@ public class DataSign {
 
     public void setLocation(final String location) {
         this.location = location;
+    }
+
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
+
+    public void setMaxPlayers(final int maxPlayers) {
+        this.maxPlayers = maxPlayers;
     }
 }

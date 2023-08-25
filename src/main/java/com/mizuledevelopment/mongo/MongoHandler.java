@@ -27,7 +27,7 @@ public class MongoHandler {
                 .build();
 
         MongoClient mongoClient = MongoClients.create(settings);
-        MongoDatabase mongoDatabase = mongoClient.getDatabase("teams");
+        MongoDatabase mongoDatabase = mongoClient.getDatabase("practice");
 
         this.profiles = mongoDatabase.getCollection("profiles");
         this.signs = mongoDatabase.getCollection("signs");

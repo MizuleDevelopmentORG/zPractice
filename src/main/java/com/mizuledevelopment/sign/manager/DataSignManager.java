@@ -34,4 +34,32 @@ public class DataSignManager {
         dataSigns.forEach(dataSign -> this.plugin.getMongoHandler().getSigns().replaceOne(
                 Filters.eq("name", dataSign.getName()), SignHelper.from(dataSign), new UpdateOptions().upsert(true)));
     }
+
+    public DataSign getSignByLocation(String location){
+        for (DataSign dataSign : dataSigns) {
+            if (dataSign.getLocation().equalsIgnoreCase(location)) {
+                return dataSign;
+            }
+        }
+        return null;
+    }
+
+    public Set<DataSign> getDataSigns() {
+        return dataSigns;
+    }
+
+    public DataSign getSignByName(final String name) {
+        for (DataSign dataSign : dataSigns) {
+            if (dataSign.getName().equalsIgnoreCase(name)) {
+                return dataSign;
+            }
+        }
+        return null;
+    }
+
+    public void remove(final DataSign signByLocation) {
+        dataSigns.remove(signByLocation);
+    }
+
+
 }

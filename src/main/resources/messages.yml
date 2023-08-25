@@ -1,0 +1,7 @@
+sign-create-usage: "<red>/sign create <name> <arena> <kit>"
+sign-name-exists: "<red>Sign already exists with this name."
+sign-location-exists: "<red>Sign already exists in this location. Try /sign delete"
+sign-created: "<green>Successfully created queue sign"
+sign-delete-usage: "<red>/sign delete"
+sign-not-exists: "<red>Failed to find sign at this location in database"
+sign-deleted: "<green>Successfully deleted queue sign."

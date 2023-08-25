@@ -3,7 +3,10 @@ package com.mizuledevelopment;
 import com.mizuledevelopment.listener.ProfileListener;
 import com.mizuledevelopment.mongo.MongoHandler;
 import com.mizuledevelopment.profiles.manager.ProfileManager;
+import com.mizuledevelopment.queue.manager.QueueManager;
 import com.mizuledevelopment.sign.command.SignCreateCommand;
+import com.mizuledevelopment.sign.command.SignDeleteCommand;
+import com.mizuledevelopment.sign.listener.SignListener;
 import com.mizuledevelopment.sign.manager.DataSignManager;
 import com.mizuledevelopment.util.command.manager.CommandManager;
 import com.mizuledevelopment.util.config.Config;
@@ -22,6 +25,7 @@ public final class ZPractice extends JavaPlugin {
     private ProfileManager profileManager;
     private DataSignManager dataSignManager;
     private MongoHandler mongoHandler;
+    private QueueManager queueManager;
 
     @Override
     public void onEnable() {
@@ -34,6 +38,8 @@ public final class ZPractice extends JavaPlugin {
         this.dataSignManager = new DataSignManager(this);
         this.dataSignManager.load();
         this.profileManager.load();
+
+        this.queueManager = new QueueManager();
     }
 
     @Override
@@ -51,13 +57,15 @@ public final class ZPractice extends JavaPlugin {
 
     private void listener(PluginManager pluginManager) {
         Arrays.asList(
-                new ProfileListener(this)
+                new ProfileListener(this),
+                new SignListener(this)
         ).forEach(listener -> pluginManager.registerEvents(listener, this));
     }
 
     private void command(){
         CommandManager signManager = new CommandManager(this.getCommand("sign"));
-        signManager.addSubCommand(new SignCreateCommand());
+        signManager.addSubCommand(new SignCreateCommand(this));
+        signManager.addSubCommand(new SignDeleteCommand(this));
         signManager.registerCommands();
     }
 
@@ -75,5 +83,13 @@ public final class ZPractice extends JavaPlugin {
 
     public ProfileManager getProfileManager() {
         return profileManager;
+    }
+
+    public DataSignManager getDataSignManager() {
+        return dataSignManager;
+    }
+
+    public QueueManager getQueueManager() {
+        return queueManager;
     }
 }

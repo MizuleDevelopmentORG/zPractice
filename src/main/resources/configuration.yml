@@ -13,3 +13,9 @@ selector:
     - ""
   slot: 1
   amount: 1
+
+sign-format:
+  - "%name%"
+  - "%kit%"
+  - "%arena%"
+  - "%queue_player%/%queue_size%"
