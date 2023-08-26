@@ -1,6 +1,6 @@
 package com.mizuledevelopment.zpractice.sign.command;
 
-import com.mizuledevelopment.zpractice.ZPractice;
+import com.mizuledevelopment.zpractice.zPractice;
 import com.mizuledevelopment.zpractice.util.color.MessageType;
 import com.mizuledevelopment.zpractice.util.color.TextUtil;
 import com.mizuledevelopment.zpractice.util.command.Command;
@@ -13,9 +13,9 @@ import java.util.Objects;
 
 public class SignDeleteCommand extends Command {
 
-    private final ZPractice plugin;
+    private final zPractice plugin;
 
-    public SignDeleteCommand(ZPractice plugin) {
+    public SignDeleteCommand(zPractice plugin) {
         this.plugin = plugin;
     }
 

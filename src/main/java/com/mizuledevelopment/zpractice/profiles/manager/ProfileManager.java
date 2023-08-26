@@ -1,6 +1,6 @@
 package com.mizuledevelopment.zpractice.profiles.manager;
 
-import com.mizuledevelopment.zpractice.ZPractice;
+import com.mizuledevelopment.zpractice.zPractice;
 import com.mizuledevelopment.zpractice.profiles.Profile;
 import com.mizuledevelopment.zpractice.util.helper.ProfileHelper;
 import com.mongodb.client.FindIterable;
@@ -15,10 +15,10 @@ import java.util.Set;
 
 public class ProfileManager {
 
-    private final ZPractice plugin;
+    private final zPractice plugin;
     private final Set<Profile> profiles = new HashSet<>();
 
-    public ProfileManager(ZPractice plugin) {
+    public ProfileManager(zPractice plugin) {
         this.plugin = plugin;
     }
 

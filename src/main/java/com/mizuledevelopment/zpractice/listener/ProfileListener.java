@@ -1,15 +1,15 @@
 package com.mizuledevelopment.zpractice.listener;
 
-import com.mizuledevelopment.zpractice.ZPractice;
+import com.mizuledevelopment.zpractice.zPractice;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class ProfileListener implements Listener {
 
-    private final ZPractice plugin;
+    private final zPractice plugin;
 
-    public ProfileListener(ZPractice plugin) {
+    public ProfileListener(zPractice plugin) {
         this.plugin = plugin;
     }
 

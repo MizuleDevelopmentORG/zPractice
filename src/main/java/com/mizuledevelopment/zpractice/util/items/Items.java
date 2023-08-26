@@ -1,6 +1,6 @@
 package com.mizuledevelopment.zpractice.util.items;
 
-import com.mizuledevelopment.zpractice.ZPractice;
+import com.mizuledevelopment.zpractice.zPractice;
 import com.mizuledevelopment.zpractice.util.color.MessageType;
 import com.mizuledevelopment.zpractice.util.color.TextUtil;
 import net.kyori.adventure.text.Component;
@@ -15,7 +15,7 @@ import java.util.Objects;
 @SuppressWarnings("ALL")
 public class Items {
 
-    public static ItemStack SELECTOR(ZPractice plugin){
+    public static ItemStack SELECTOR(zPractice plugin){
         ItemStack itemStack = new ItemStack(Material.valueOf(plugin.getConfiguration().getConfiguration().getString("selector.item")));
         itemStack.setAmount(plugin.getConfiguration().getConfiguration().getInt("selector.amount"));
         plugin.getConfiguration().getConfiguration().getStringList("selector.enchantments")

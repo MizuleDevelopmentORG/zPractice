@@ -1,6 +1,6 @@
 package com.mizuledevelopment.zpractice.sign.command;
 
-import com.mizuledevelopment.zpractice.ZPractice;
+import com.mizuledevelopment.zpractice.zPractice;
 import com.mizuledevelopment.zpractice.sign.DataSign;
 import com.mizuledevelopment.zpractice.util.color.MessageType;
 import com.mizuledevelopment.zpractice.util.color.TextUtil;
@@ -15,9 +15,9 @@ import java.util.Objects;
 
 public class SignCreateCommand extends Command {
 
-    private final ZPractice plugin;
+    private final zPractice plugin;
 
-    public SignCreateCommand(ZPractice plugin) {
+    public SignCreateCommand(zPractice plugin) {
         this.plugin = plugin;
     }
 

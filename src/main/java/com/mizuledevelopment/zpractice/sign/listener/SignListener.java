@@ -1,6 +1,6 @@
 package com.mizuledevelopment.zpractice.sign.listener;
 
-import com.mizuledevelopment.zpractice.ZPractice;
+import com.mizuledevelopment.zpractice.zPractice;
 import com.mizuledevelopment.zpractice.queue.Queue;
 import com.mizuledevelopment.zpractice.sign.DataSign;
 import org.bukkit.event.EventHandler;
@@ -11,9 +11,9 @@ import java.util.*;
 
 public class SignListener implements Listener {
 
-    private final ZPractice plugin;
+    private final zPractice plugin;
 
-    public SignListener(ZPractice plugin) {
+    public SignListener(zPractice plugin) {
         this.plugin = plugin;
     }
 

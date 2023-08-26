@@ -18,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.util.Arrays;
 
-public final class ZPractice extends JavaPlugin {
+public final class zPractice extends JavaPlugin {
 
     private Config configuration;
     private Config messages;

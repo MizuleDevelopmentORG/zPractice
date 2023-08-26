@@ -1,6 +1,6 @@
 package com.mizuledevelopment.zpractice.sign.manager;
 
-import com.mizuledevelopment.zpractice.ZPractice;
+import com.mizuledevelopment.zpractice.zPractice;
 import com.mizuledevelopment.zpractice.sign.DataSign;
 import com.mizuledevelopment.zpractice.util.helper.SignHelper;
 import com.mongodb.client.FindIterable;
@@ -14,10 +14,10 @@ import java.util.Set;
 
 public class DataSignManager {
 
-    private final ZPractice plugin;
+    private final zPractice plugin;
     private final Set<DataSign> dataSigns = new HashSet<>();
 
-    public DataSignManager(ZPractice plugin) {
+    public DataSignManager(zPractice plugin) {
         this.plugin = plugin;
     }
 
