@@ -6,6 +6,7 @@ import com.mizuledevelopment.zpractice.util.helper.SignHelper;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.ReplaceOptions;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
 
@@ -30,10 +31,9 @@ public class DataSignManager {
         }
     }
 
-    @SuppressWarnings(value = "ALL")
     public void save(){
         dataSigns.forEach(dataSign -> this.plugin.getMongoHandler().getSigns().replaceOne(
-                Filters.eq("name", dataSign.getName()), SignHelper.from(dataSign), new UpdateOptions().upsert(true)));
+                Filters.eq("name", dataSign.getName()), SignHelper.from(dataSign), new ReplaceOptions().upsert(true)));
     }
 
     public DataSign getSignByLocation(String location){

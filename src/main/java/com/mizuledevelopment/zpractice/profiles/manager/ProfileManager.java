@@ -12,6 +12,7 @@ import org.bson.Document;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class ProfileManager {
 
@@ -49,7 +50,7 @@ public class ProfileManager {
         return false;
     }
 
-    public void createProfile(final String string) {
+    public void createProfile(final UUID string) {
         profiles.add(new Profile(string, 0,0,0,0,null,null,null,null));
     }
 }

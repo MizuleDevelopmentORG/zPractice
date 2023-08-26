@@ -1,10 +1,11 @@
 package com.mizuledevelopment.zpractice.profiles;
 
 import java.util.List;
+import java.util.UUID;
 
 public class Profile {
 
-    private final String uuid;
+    private final UUID uuid;
     private int kills;
     private int deaths;
     private int wins;
@@ -15,15 +16,15 @@ public class Profile {
     private List<String> arenaDeaths;
 
     public Profile(
-            String uuid,
-            int kills,
-            int deaths,
-            int wins,
-            int loses,
-            List<String> arenaWins,
-            List<String> arenaLoses,
-            List<String> arenaKills,
-            List<String> arenaDeaths
+        UUID uuid,
+        int kills,
+        int deaths,
+        int wins,
+        int loses,
+        List<String> arenaWins,
+        List<String> arenaLoses,
+        List<String> arenaKills,
+        List<String> arenaDeaths
     ) {
         this.uuid = uuid;
         this.kills = kills;
@@ -36,7 +37,7 @@ public class Profile {
         this.arenaDeaths = arenaDeaths;
     }
 
-    public String getUuid() {
+    public UUID getUuid() {
         return uuid;
     }
 

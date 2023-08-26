@@ -1,8 +1,10 @@
 package com.mizuledevelopment.zpractice.sign.listener;
 
+import com.destroystokyo.paper.MaterialSetTag;
 import com.mizuledevelopment.zpractice.zPractice;
 import com.mizuledevelopment.zpractice.queue.Queue;
 import com.mizuledevelopment.zpractice.sign.DataSign;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -19,9 +21,11 @@ public class SignListener implements Listener {
 
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
-        if (event.getClickedBlock() == null) return;
-        if (Objects.requireNonNull(event.getClickedBlock()).getType().name().contains("WALL_SIGN")) {
-            DataSign dataSign = this.plugin.getDataSignManager().getSignByLocation(event.getClickedBlock().getLocation().toString());
+        final Block clickedBlock = event.getClickedBlock();
+        if (clickedBlock == null) return;
+
+        if (MaterialSetTag.SIGNS.isTagged(clickedBlock.getType())) {
+            DataSign dataSign = this.plugin.getDataSignManager().getSignByLocation(clickedBlock.getLocation().toString());
 
             if (dataSign != null) {
                 if (!this.plugin.getQueueManager().has(dataSign.getName())) {
