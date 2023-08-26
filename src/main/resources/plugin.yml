@@ -1,6 +1,6 @@
 name: zPractice
 version: '${version}'
-main: com.mizuledevelopment.ZPractice
+main: com.mizuledevelopment.zpractice.ZPractice
 api-version: '1.18'
 commands:
   sign:
