@@ -1,6 +1,9 @@
 name: zPractice
-version: '${version}'
+version: "${pluginVersion}"
 main: com.mizuledevelopment.zpractice.zPractice
-api-version: '1.18'
+api-version: "1.18"
+website: "${pluginWebsite}"
+author: "${pluginAuthor}"
+description: "${pluginDescription}"
 commands:
   sign:
