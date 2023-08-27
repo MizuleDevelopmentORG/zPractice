@@ -49,7 +49,7 @@ public class ProfileManager {
         return false;
     }
 
-    public void createProfile(final UUID string) {
-        this.profiles.add(new Profile(string, 0, 0, 0, 0, null, null, null, null));
+    public void createProfile(final String uuid) {
+        this.profiles.add(new Profile(uuid, 0, 0, 0, 0, null, null, null, null));
     }
 }

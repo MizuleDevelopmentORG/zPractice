@@ -4,6 +4,7 @@ import com.mizuledevelopment.zpractice.queue.Queue;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class QueueManager {
 
@@ -29,5 +30,14 @@ public class QueueManager {
             }
         }
         return null;
+    }
+
+    public boolean containsPlayer(final UUID uuid) {
+        for (Queue queue : queues) {
+            if (queue.getPlayers().contains(uuid)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

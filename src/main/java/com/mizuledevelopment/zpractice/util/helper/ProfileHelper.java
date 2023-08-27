@@ -9,7 +9,7 @@ public class ProfileHelper {
 
     public static Profile from(Document document){
         return new Profile
-                (UUID.fromString(document.getString("uuid")),
+                ((document.getString("uuid")),
                         document.getInteger("kills"),
                         document.getInteger("deaths"),
                         document.getInteger("wins"),

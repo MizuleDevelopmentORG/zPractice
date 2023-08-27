@@ -5,6 +5,7 @@ import com.mizuledevelopment.zpractice.util.LazyLocation;
 import com.mizuledevelopment.zpractice.zPractice;
 import com.mizuledevelopment.zpractice.queue.Queue;
 import com.mizuledevelopment.zpractice.sign.DataSign;
+import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,11 +30,17 @@ public class SignListener implements Listener {
             DataSign dataSign = this.plugin.getDataSignManager().getSignByLocation(LazyLocation.fromLocation(clickedBlock.getLocation()));
 
             if (dataSign != null) {
+                if (this.plugin.getQueueManager().containsPlayer(event.getPlayer().getUniqueId())) {
+                    Bukkit.broadcastMessage("you already in queue");
+                    return;
+                }
+
                 if (!this.plugin.getQueueManager().has(dataSign.getName())) {
                     this.plugin.getQueueManager().getQueues().add(new Queue(dataSign.getName(), dataSign.getArena(), dataSign.getKit(), new HashSet<>(Collections.singletonList(event.getPlayer().getUniqueId())), dataSign.getMaxPlayers()));
+                    Bukkit.broadcastMessage("added you to queue");
                 } else {
                     this.plugin.getQueueManager().get(dataSign.getName()).getPlayers().add(event.getPlayer().getUniqueId());
-
+                    Bukkit.broadcastMessage("added you to queue with second method");
                     if (this.plugin.getQueueManager().get(dataSign.getName()).getPlayers().size() == dataSign.getMaxPlayers()) {
                         // todo move players
                     }

@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Profile {
 
-    private final UUID uuid;
+    private final String uuid;
     private int kills;
     private int deaths;
     private int wins;
@@ -16,7 +16,7 @@ public class Profile {
     private List<String> arenaDeaths;
 
     public Profile(
-        UUID uuid,
+        String uuid,
         int kills,
         int deaths,
         int wins,
@@ -37,7 +37,7 @@ public class Profile {
         this.arenaDeaths = arenaDeaths;
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return uuid;
     }
 

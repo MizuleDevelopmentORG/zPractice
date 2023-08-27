@@ -16,7 +16,7 @@ public class ProfileListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         if (!this.plugin.getProfileManager().containsProfile(event.getPlayer().getUniqueId())) {
-            this.plugin.getProfileManager().createProfile(event.getPlayer().getUniqueId());
+            this.plugin.getProfileManager().createProfile(event.getPlayer().getUniqueId().toString());
         }
     }
 }
