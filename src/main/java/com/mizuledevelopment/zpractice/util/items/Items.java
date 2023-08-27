@@ -12,7 +12,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.Objects;
 
-@SuppressWarnings("ALL")
 public class Items {
 
     public static ItemStack SELECTOR(zPractice plugin){
