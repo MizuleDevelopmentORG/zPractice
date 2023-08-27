@@ -1,5 +1,6 @@
 package com.mizuledevelopment.zpractice.sign.command;
 
+import com.mizuledevelopment.zpractice.util.LazyLocation;
 import com.mizuledevelopment.zpractice.zPractice;
 import com.mizuledevelopment.zpractice.util.color.MessageType;
 import com.mizuledevelopment.zpractice.util.color.TextUtil;
@@ -24,14 +25,13 @@ public class SignDeleteCommand extends Command {
         if (!(sender instanceof Player player)) return;
 
         if (this.plugin.getDataSignManager().getSignByLocation
-                (LocationSerializer.serialize(Objects.requireNonNull(player.getTargetBlock(5)).getLocation())) == null) {
+                (LazyLocation.fromLocation(Objects.requireNonNull(player.getTargetBlock(5)).getLocation())) == null) {
             player.sendMessage(TextUtil.parse(this.plugin.getMessages().getConfiguration().getString("sign-not-exists"),
                     MessageType.from(Objects.requireNonNull(this.plugin.getMessages().getConfiguration().getString("sign-not-exists")))));
             return;
         }
 
-        this.plugin.getDataSignManager().remove(this.plugin.getDataSignManager().getSignByLocation(LocationSerializer
-                .serialize(Objects.requireNonNull(player.getTargetBlock(5)).getLocation())));
+        this.plugin.getDataSignManager().remove(this.plugin.getDataSignManager().getSignByLocation(LazyLocation.fromLocation(Objects.requireNonNull(player.getTargetBlock(5)).getLocation())));
         player.sendMessage(TextUtil.parse(this.plugin.getMessages().getConfiguration().getString("sign-deleted"),
                 MessageType.from(Objects.requireNonNull(this.plugin.getMessages().getConfiguration().getString("sign-deleted")))));
     }

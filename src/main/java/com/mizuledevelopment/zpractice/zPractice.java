@@ -1,5 +1,7 @@
 package com.mizuledevelopment.zpractice;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mizuledevelopment.zpractice.listener.ProfileListener;
 import com.mizuledevelopment.zpractice.mongo.MongoHandler;
 import com.mizuledevelopment.zpractice.profiles.manager.ProfileManager;
@@ -8,8 +10,11 @@ import com.mizuledevelopment.zpractice.sign.command.SignCreateCommand;
 import com.mizuledevelopment.zpractice.sign.command.SignDeleteCommand;
 import com.mizuledevelopment.zpractice.sign.listener.SignListener;
 import com.mizuledevelopment.zpractice.sign.manager.DataSignManager;
+import com.mizuledevelopment.zpractice.util.LazyLocation;
 import com.mizuledevelopment.zpractice.util.command.manager.CommandManager;
 import com.mizuledevelopment.zpractice.util.config.Config;
+import com.mizuledevelopment.zpractice.util.serializer.LazyLocationTypeSerializer;
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -26,6 +31,12 @@ public final class zPractice extends JavaPlugin {
     private DataSignManager dataSignManager;
     private MongoHandler mongoHandler;
     private QueueManager queueManager;
+    public static final Gson GSON = GsonComponentSerializer.gson().populator()
+        .apply(new GsonBuilder()
+            .registerTypeHierarchyAdapter(LazyLocation.class, new LazyLocationTypeSerializer())
+            .serializeNulls()
+            .enableComplexMapKeySerialization()
+        ).create();
 
     @Override
     public void onEnable() {

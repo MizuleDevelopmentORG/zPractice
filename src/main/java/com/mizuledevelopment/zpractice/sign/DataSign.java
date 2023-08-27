@@ -1,14 +1,16 @@
 package com.mizuledevelopment.zpractice.sign;
 
+import com.mizuledevelopment.zpractice.util.LazyLocation;
+
 public class DataSign {
 
     private String name;
     private String arena;
     private String kit;
-    private String location;
+    private LazyLocation location;
     private int maxPlayers;
 
-    public DataSign(String name, String arena, String kit, String location, int maxPlayers) {
+    public DataSign(String name, String arena, String kit, LazyLocation location, int maxPlayers) {
         this.name = name;
         this.arena = arena;
         this.kit = kit;
@@ -40,11 +42,11 @@ public class DataSign {
         this.name = name;
     }
 
-    public String getLocation() {
+    public LazyLocation getLocation() {
         return location;
     }
 
-    public void setLocation(final String location) {
+    public void setLocation(final LazyLocation location) {
         this.location = location;
     }
 

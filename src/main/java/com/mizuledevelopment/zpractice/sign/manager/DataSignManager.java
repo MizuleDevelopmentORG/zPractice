@@ -1,5 +1,6 @@
 package com.mizuledevelopment.zpractice.sign.manager;
 
+import com.mizuledevelopment.zpractice.util.LazyLocation;
 import com.mizuledevelopment.zpractice.zPractice;
 import com.mizuledevelopment.zpractice.sign.DataSign;
 import com.mizuledevelopment.zpractice.util.helper.SignHelper;
@@ -36,9 +37,9 @@ public class DataSignManager {
                 Filters.eq("name", dataSign.getName()), SignHelper.from(dataSign), new ReplaceOptions().upsert(true)));
     }
 
-    public DataSign getSignByLocation(String location){
+    public DataSign getSignByLocation(LazyLocation location){
         for (DataSign dataSign : dataSigns) {
-            if (dataSign.getLocation().equalsIgnoreCase(location)) {
+            if (dataSign.getLocation().equals(location)) {
                 return dataSign;
             }
         }

@@ -1,13 +1,12 @@
 package com.mizuledevelopment.zpractice.profiles.manager;
 
-import com.mizuledevelopment.zpractice.zPractice;
 import com.mizuledevelopment.zpractice.profiles.Profile;
 import com.mizuledevelopment.zpractice.util.helper.ProfileHelper;
+import com.mizuledevelopment.zpractice.zPractice;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
-
-import com.mongodb.client.model.UpdateOptions;
+import com.mongodb.client.model.ReplaceOptions;
 import org.bson.Document;
 
 import java.util.HashSet;
@@ -19,31 +18,31 @@ public class ProfileManager {
     private final zPractice plugin;
     private final Set<Profile> profiles = new HashSet<>();
 
-    public ProfileManager(zPractice plugin) {
+    public ProfileManager(final zPractice plugin) {
         this.plugin = plugin;
     }
 
-    public void load(){
-        FindIterable<Document> findIterable = this.plugin.getMongoHandler().getProfiles().find();
-        try (MongoCursor<Document> cursor = findIterable.iterator()) {
+    public void load() {
+        final FindIterable<Document> findIterable = this.plugin.getMongoHandler().getProfiles().find();
+        try (final MongoCursor<Document> cursor = findIterable.iterator()) {
             while (cursor.hasNext()) {
-                profiles.add(ProfileHelper.from(cursor.next()));
+                this.profiles.add(ProfileHelper.from(cursor.next()));
             }
         }
     }
 
-    public void save(){
-        profiles.forEach(profile -> this.plugin.getMongoHandler().getProfiles().replaceOne(Filters.eq("uuid",
-                profile.getUuid()), ProfileHelper.from(profile), new UpdateOptions().upsert(true)));
+    public void save() {
+        this.profiles.forEach(profile -> this.plugin.getMongoHandler().getProfiles().replaceOne(Filters.eq("uuid",
+            profile.getUuid()), ProfileHelper.from(profile), new ReplaceOptions().upsert(true)));
     }
 
     public Set<Profile> getProfiles() {
-        return profiles;
+        return this.profiles;
     }
 
-    public boolean containsProfile(final String uniqueId) {
-        for (Profile profile : profiles) {
-            if (profile.getUuid().equalsIgnoreCase(uniqueId)) {
+    public boolean containsProfile(final UUID uniqueId) {
+        for (final Profile profile : this.profiles) {
+            if (profile.getUuid().equals(uniqueId)) {
                 return true;
             }
         }
@@ -51,6 +50,6 @@ public class ProfileManager {
     }
 
     public void createProfile(final UUID string) {
-        profiles.add(new Profile(string, 0,0,0,0,null,null,null,null));
+        this.profiles.add(new Profile(string, 0, 0, 0, 0, null, null, null, null));
     }
 }

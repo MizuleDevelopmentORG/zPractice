@@ -1,6 +1,7 @@
 package com.mizuledevelopment.zpractice.sign.listener;
 
 import com.destroystokyo.paper.MaterialSetTag;
+import com.mizuledevelopment.zpractice.util.LazyLocation;
 import com.mizuledevelopment.zpractice.zPractice;
 import com.mizuledevelopment.zpractice.queue.Queue;
 import com.mizuledevelopment.zpractice.sign.DataSign;
@@ -25,7 +26,7 @@ public class SignListener implements Listener {
         if (clickedBlock == null) return;
 
         if (MaterialSetTag.SIGNS.isTagged(clickedBlock.getType())) {
-            DataSign dataSign = this.plugin.getDataSignManager().getSignByLocation(clickedBlock.getLocation().toString());
+            DataSign dataSign = this.plugin.getDataSignManager().getSignByLocation(LazyLocation.fromLocation(clickedBlock.getLocation()));
 
             if (dataSign != null) {
                 if (!this.plugin.getQueueManager().has(dataSign.getName())) {

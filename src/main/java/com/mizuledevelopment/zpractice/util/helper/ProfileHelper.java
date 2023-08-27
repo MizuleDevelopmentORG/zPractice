@@ -3,11 +3,13 @@ package com.mizuledevelopment.zpractice.util.helper;
 import com.mizuledevelopment.zpractice.profiles.Profile;
 import org.bson.Document;
 
+import java.util.UUID;
+
 public class ProfileHelper {
 
     public static Profile from(Document document){
         return new Profile
-                (document.getString("uuid"),
+                (UUID.fromString(document.getString("uuid")),
                         document.getInteger("kills"),
                         document.getInteger("deaths"),
                         document.getInteger("wins"),
