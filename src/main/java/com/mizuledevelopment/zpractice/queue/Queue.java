@@ -1,5 +1,6 @@
 package com.mizuledevelopment.zpractice.queue;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -8,10 +9,10 @@ public class Queue {
     private String name;
     private String arena;
     private String kit;
-    private Set<UUID> players;
+    private List<UUID> players;
     private int maxPlayers;
 
-    public Queue(String name, String arena, String kit, Set<UUID> players, int maxPlayers) {
+    public Queue(String name, String arena, String kit, List<UUID> players, int maxPlayers) {
         this.name = name;
         this.arena = arena;
         this.kit = kit;
@@ -31,7 +32,7 @@ public class Queue {
         return arena;
     }
 
-    public Set<UUID> getPlayers() {
+    public List<UUID> getPlayers() {
         return players;
     }
 
@@ -47,7 +48,7 @@ public class Queue {
         this.arena = arena;
     }
 
-    public void setPlayers(final Set<UUID> players) {
+    public void setPlayers(final List<UUID> players) {
         this.players = players;
     }
 

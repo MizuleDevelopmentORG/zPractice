@@ -1,6 +1,7 @@
 package com.mizuledevelopment.zpractice.profiles;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class Profile {
@@ -14,6 +15,7 @@ public class Profile {
     private List<String> arenaLoses;
     private List<String> arenaKills;
     private List<String> arenaDeaths;
+    private List<String> customKits;
 
     public Profile(
         String uuid,
@@ -24,7 +26,8 @@ public class Profile {
         List<String> arenaWins,
         List<String> arenaLoses,
         List<String> arenaKills,
-        List<String> arenaDeaths
+        List<String> arenaDeaths,
+        List<String> customKits
     ) {
         this.uuid = uuid;
         this.kills = kills;
@@ -35,6 +38,7 @@ public class Profile {
         this.arenaLoses = arenaLoses;
         this.arenaKills = arenaKills;
         this.arenaDeaths = arenaDeaths;
+        this.customKits = customKits;
     }
 
     public String getUuid() {
@@ -73,6 +77,10 @@ public class Profile {
         return arenaWins;
     }
 
+    public List<String> getCustomKits() {
+        return customKits;
+    }
+
     public void setArenaLoses(final List<String> arenaLoses) {
         this.arenaLoses = arenaLoses;
     }
@@ -103,6 +111,10 @@ public class Profile {
 
     public void setWins(final int wins) {
         this.wins = wins;
+    }
+
+    public void setCustomKits(final List<String> customKits) {
+        this.customKits = customKits;
     }
 }
 

@@ -17,7 +17,8 @@ public class ProfileHelper {
                         document.getList("arenaWins", String.class),
                         document.getList("arenaLoses", String.class),
                         document.getList("arenaKills", String.class),
-                        document.getList("arenaDeaths", String.class));
+                        document.getList("arenaDeaths", String.class),
+                        document.getList("kits", String.class));
     }
 
     public static Document from(Profile profile) {
@@ -31,6 +32,7 @@ public class ProfileHelper {
         document.put("arenaLoses", profile.getArenaLoses());
         document.put("arenaKills", profile.getArenaKills());
         document.put("arenaDeaths", profile.getArenaDeaths());
+        document.put("kits", profile.getCustomKits());
         return document;
     }
 }

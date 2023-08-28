@@ -10,6 +10,8 @@ import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
+import java.lang.module.ModuleFinder;
+
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -17,6 +19,8 @@ public class MongoHandler {
 
     private final MongoCollection<Document> profiles;
     private final MongoCollection<Document> signs;
+    private final MongoCollection<Document> kits;
+    private final MongoCollection<Document> arenas;
 
     public MongoHandler(final String s) {
         CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(), fromProviders(PojoCodecProvider.builder().automatic(true).build()));
@@ -31,6 +35,8 @@ public class MongoHandler {
 
         this.profiles = mongoDatabase.getCollection("profiles");
         this.signs = mongoDatabase.getCollection("signs");
+        this.kits = mongoDatabase.getCollection("kits");
+        this.arenas = mongoDatabase.getCollection("arenas");
     }
 
     public MongoCollection<Document> getProfiles() {
@@ -39,5 +45,13 @@ public class MongoHandler {
 
     public MongoCollection<Document> getSigns() {
         return signs;
+    }
+
+    public MongoCollection<Document> getKits() {
+        return kits;
+    }
+
+    public MongoCollection<Document> getArenas() {
+        return arenas;
     }
 }

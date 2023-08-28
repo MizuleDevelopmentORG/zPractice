@@ -42,7 +42,7 @@ public class ProfileManager {
 
     public boolean containsProfile(final UUID uniqueId) {
         for (final Profile profile : this.profiles) {
-            if (profile.getUuid().equals(uniqueId)) {
+            if (profile.getUuid().equals(uniqueId.toString())) {
                 return true;
             }
         }
@@ -50,6 +50,6 @@ public class ProfileManager {
     }
 
     public void createProfile(final String uuid) {
-        this.profiles.add(new Profile(uuid, 0, 0, 0, 0, null, null, null, null));
+        this.profiles.add(new Profile(uuid, 0, 0, 0, 0, null, null, null, null, null));
     }
 }

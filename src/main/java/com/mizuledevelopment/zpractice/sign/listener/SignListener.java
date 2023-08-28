@@ -41,7 +41,7 @@ public class SignListener implements Listener {
                     return;
                 }
                 if (!this.plugin.getQueueManager().has(dataSign.getName())) {
-                    this.plugin.getQueueManager().getQueues().add(new Queue(dataSign.getName(), dataSign.getArena(), dataSign.getKit(), new HashSet<>(Collections.singletonList(event.getPlayer().getUniqueId())), dataSign.getMaxPlayers()));
+                    this.plugin.getQueueManager().getQueues().add(new Queue(dataSign.getName(), dataSign.getArena(), dataSign.getKit(), new ArrayList<>(Collections.singletonList(event.getPlayer().getUniqueId())), dataSign.getMaxPlayers()));
                     event.getPlayer().sendMessage(TextUtil.parse(Objects.requireNonNull(this.plugin.getMessages()
                             .getConfiguration().getString("queue-joined"))
                         .replace("%arena%", dataSign.getArena())
@@ -52,12 +52,16 @@ public class SignListener implements Listener {
                         .getConfiguration().getString("queue-joined")))));
                 } else {
                     this.plugin.getQueueManager().get(dataSign.getName()).getPlayers().add(event.getPlayer().getUniqueId());
-                    event.getPlayer().sendMessage(TextUtil.parse(this.plugin.getMessages()
-                        .getConfiguration().getString("queue-joined"), MessageType.from(Objects.requireNonNull(this.plugin.getMessages()
+                    event.getPlayer().sendMessage(TextUtil.parse(Objects.requireNonNull(this.plugin.getMessages()
+                            .getConfiguration().getString("queue-joined"))
+                        .replace("%arena%", dataSign.getArena())
+                        .replace("%kit%", dataSign.getKit())
+                        .replace("%name%", dataSign.getName())
+                        .replace("%players%", String.valueOf(this.plugin.getQueueManager().get(dataSign.getName()).getPlayers().size()))
+                        .replace("%max%", String.valueOf(dataSign.getMaxPlayers())), MessageType.from(Objects.requireNonNull(this.plugin.getMessages()
                         .getConfiguration().getString("queue-joined")))));
-
                     if (this.plugin.getQueueManager().get(dataSign.getName()).getPlayers().size() == dataSign.getMaxPlayers()) {
-                        // todo move players
+
                     }
                 }
             }

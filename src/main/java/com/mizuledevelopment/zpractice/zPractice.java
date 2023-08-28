@@ -2,6 +2,8 @@ package com.mizuledevelopment.zpractice;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mizuledevelopment.zpractice.arena.manager.ArenaManager;
+import com.mizuledevelopment.zpractice.kit.manager.KitManager;
 import com.mizuledevelopment.zpractice.listener.ProfileListener;
 import com.mizuledevelopment.zpractice.mongo.MongoHandler;
 import com.mizuledevelopment.zpractice.profiles.manager.ProfileManager;
@@ -31,6 +33,9 @@ public final class zPractice extends JavaPlugin {
     private DataSignManager dataSignManager;
     private MongoHandler mongoHandler;
     private QueueManager queueManager;
+    private KitManager kitManager;
+    private ArenaManager arenaManager;
+
     public static final Gson GSON = GsonComponentSerializer.gson().populator()
         .apply(new GsonBuilder()
             .registerTypeHierarchyAdapter(LazyLocation.class, new LazyLocationTypeSerializer())
@@ -47,16 +52,25 @@ public final class zPractice extends JavaPlugin {
         this.mongoHandler = new MongoHandler(this.getConfiguration().getConfiguration().getString("mongo.uri"));
         this.profileManager = new ProfileManager(this);
         this.dataSignManager = new DataSignManager(this);
+        this.kitManager = new KitManager(this);
+        this.arenaManager = new ArenaManager(this);
+
         this.dataSignManager.load();
         this.profileManager.load();
+        this.kitManager.load();
+        this.arenaManager.load();
 
         this.queueManager = new QueueManager();
     }
 
     @Override
+    @Deprecated
     public void onDisable() {
         this.profileManager.save();
         this.dataSignManager.save();
+        this.kitManager.save();
+        this.arenaManager.reset();
+        this.arenaManager.save();
     }
 
     private void configuration(){
