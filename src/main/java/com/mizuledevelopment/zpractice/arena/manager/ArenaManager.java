@@ -19,6 +19,8 @@ public class ArenaManager {
 
     private final zPractice plugin;
     private final Set<Arena> arenas = new HashSet<>();
+    private final Set<Arena> startingArenas = new HashSet<>();
+
 
     public ArenaManager(zPractice plugin) {
         this.plugin = plugin;
@@ -50,5 +52,18 @@ public class ArenaManager {
             this.plugin.getMongoHandler().getArenas()
                 .replaceOne(Filters.eq("name", arena.getName()), ArenaHelper.from(arena), new UpdateOptions().upsert(true));
         });
+    }
+
+    public Arena getArenaByName(String name) {
+        for (Arena arena : arenas) {
+            if (arena.getName().equalsIgnoreCase(name)) {
+                return arena;
+            }
+        }
+        return null;
+    }
+
+    public Set<Arena> getStartingArenas() {
+        return startingArenas;
     }
 }

@@ -1,9 +1,11 @@
 package com.mizuledevelopment.zpractice.arena.handler;
 
 import com.mizuledevelopment.zpractice.arena.Arena;
+import com.mizuledevelopment.zpractice.arena.ArenaState;
 import com.mizuledevelopment.zpractice.queue.Queue;
 import com.mizuledevelopment.zpractice.util.serializer.ItemStackSerializer;
 import com.mizuledevelopment.zpractice.util.serializer.LocationSerializer;
+import com.mizuledevelopment.zpractice.zPractice;
 import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
@@ -13,9 +15,11 @@ import java.util.UUID;
 
 public class ArenaHandler {
 
+    private final zPractice plugin;
     private final Arena arena;
 
-    public ArenaHandler(Arena arena) {
+    public ArenaHandler(Arena arena, zPractice plugin) {
+        this.plugin = plugin;
         this.arena = arena;
     }
 
@@ -64,5 +68,10 @@ public class ArenaHandler {
                 }
             }
         }
+    }
+
+    public void start(){
+        arena.setState(ArenaState.STARTING);
+        this.plugin.getArenaManager().getStartingArenas().add(arena);
     }
 }

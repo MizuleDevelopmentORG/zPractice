@@ -3,6 +3,8 @@ license: ""
 mongo:
   uri: "mongodb://158.69.163.121:42741/"
 
+starting-timer: 15
+
 selector:
   item: ""
   enchantments:

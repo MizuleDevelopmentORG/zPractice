@@ -117,4 +117,8 @@ public final class zPractice extends JavaPlugin {
     public QueueManager getQueueManager() {
         return queueManager;
     }
+
+    public ArenaManager getArenaManager() {
+        return arenaManager;
+    }
 }

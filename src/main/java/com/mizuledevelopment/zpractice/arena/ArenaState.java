@@ -4,5 +4,6 @@ public enum ArenaState {
 
     WAITING,
     GAME,
-    RESETTING;
+    RESETTING,
+    STARTING;
 }
