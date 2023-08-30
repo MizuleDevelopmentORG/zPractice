@@ -3,10 +3,13 @@ package com.mizuledevelopment.zpractice.arena.handler;
 import com.mizuledevelopment.zpractice.arena.Arena;
 import com.mizuledevelopment.zpractice.arena.ArenaState;
 import com.mizuledevelopment.zpractice.queue.Queue;
+import com.mizuledevelopment.zpractice.util.color.MessageType;
+import com.mizuledevelopment.zpractice.util.color.TextUtil;
 import com.mizuledevelopment.zpractice.util.serializer.ItemStackSerializer;
 import com.mizuledevelopment.zpractice.util.serializer.LocationSerializer;
 import com.mizuledevelopment.zpractice.zPractice;
 import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,5 +76,20 @@ public class ArenaHandler {
     public void start(){
         arena.setState(ArenaState.STARTING);
         this.plugin.getArenaManager().getStartingArenas().add(arena);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (UUID uuid : arena.getTeamOne()) {
+                    if (uuid != null) {
+                        Objects.requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(TextUtil.parse(
+                            Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting"))
+                                .replace("%timer%", String.valueOf(plugin.getConfiguration().getConfiguration().getString("starting-timer"))),
+                            MessageType.from(Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting")))));
+                    }
+                }
+            }
+        }.runTaskLater(this.plugin, (this.plugin.getConfiguration().getConfiguration().getInt("starting-timer")) * 20L);
+        arena.setState(ArenaState.GAME);
     }
 }

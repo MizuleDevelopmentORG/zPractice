@@ -5,6 +5,11 @@ mongo:
 
 starting-timer: 15
 
+spawn:
+  x: 0
+  y: 100
+  z: 0
+
 selector:
   item: ""
   enchantments:

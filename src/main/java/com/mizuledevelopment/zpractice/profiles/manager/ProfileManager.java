@@ -52,4 +52,13 @@ public class ProfileManager {
     public void createProfile(final String uuid) {
         this.profiles.add(new Profile(uuid, 0, 0, 0, 0, null, null, null, null, null));
     }
+
+    public Profile get(UUID uuid) {
+        for (Profile profile : profiles) {
+            if (profile.getUuid().equalsIgnoreCase(uuid.toString())) {
+                return profile;
+            }
+        }
+        return null;
+    }
 }

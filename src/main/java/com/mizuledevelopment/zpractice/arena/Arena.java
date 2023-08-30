@@ -14,6 +14,7 @@ public class Arena {
     private List<String> kitItems;
     private int startingTimer;
     private List<UUID> teamOne, teamTwo;
+    private List<UUID> specatators;
     private List<Location> placedBlocks;
     private Map<Location, Material> brokenBlocks;
     private String locationOne, locationTwo;
@@ -30,6 +31,7 @@ public class Arena {
         this.teamTwo = new ArrayList<>();
         this.brokenBlocks = new HashMap<>();
         this.placedBlocks = new ArrayList<>();
+        this.specatators = new ArrayList<>();
     }
 
     public String getName() {
@@ -118,5 +120,13 @@ public class Arena {
 
     public void setWorld(final String world) {
         this.world = world;
+    }
+
+    public List<UUID> getSpecatators() {
+        return specatators;
+    }
+
+    public void setSpecatators(final List<UUID> specatators) {
+        this.specatators = specatators;
     }
 }

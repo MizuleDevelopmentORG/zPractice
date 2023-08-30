@@ -9,11 +9,10 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class ArenaManager {
 
@@ -65,5 +64,24 @@ public class ArenaManager {
 
     public Set<Arena> getStartingArenas() {
         return startingArenas;
+    }
+
+    public Arena find(UUID uniqueId) {
+        for (Arena arena : arenas) {
+            if (arena.getTeamOne().contains(uniqueId) || arena.getTeamTwo().contains(uniqueId)) {
+                return arena;
+            }
+        }
+        return null;
+    }
+
+    public void resetArena(Arena arena) {
+        for (Location location : arena.getPlacedBlocks()) {
+            location.getBlock().setType(Material.AIR);
+        }
+
+        for (Map.Entry<Location, Material> map : arena.getBrokenBlocks().entrySet()) {
+            map.getKey().getBlock().setType(map.getValue());
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.mizuledevelopment.zpractice.sign.listener;
 
 import com.destroystokyo.paper.MaterialSetTag;
 import com.mizuledevelopment.zpractice.arena.Arena;
+import com.mizuledevelopment.zpractice.arena.ArenaState;
 import com.mizuledevelopment.zpractice.arena.handler.ArenaHandler;
 import com.mizuledevelopment.zpractice.util.LazyLocation;
 import com.mizuledevelopment.zpractice.util.color.MessageType;
@@ -64,12 +65,14 @@ public class SignListener implements Listener {
                         .getConfiguration().getString("queue-joined")))));
                     if (this.plugin.getQueueManager().get(dataSign.getName()).getPlayers().size() == dataSign.getMaxPlayers()) {
                         Queue queue = this.plugin.getQueueManager().get(dataSign.getName());
-                        ArenaHandler arenaHandler = new ArenaHandler(this.plugin.getArenaManager().getArenaByName(dataSign.getArena()), this.plugin);
+                        if (this.plugin.getArenaManager().getArenaByName(dataSign.getName()).getState() == ArenaState.WAITING) {
+                            ArenaHandler arenaHandler = new ArenaHandler(this.plugin.getArenaManager().getArenaByName(dataSign.getArena()), this.plugin);
 
-                        arenaHandler.addPlayers(queue);
-                        arenaHandler.sendPlayers();
-                        arenaHandler.applyKits();
-
+                            arenaHandler.addPlayers(queue);
+                            arenaHandler.sendPlayers();
+                            arenaHandler.applyKits();
+                            arenaHandler.start();
+                        }
                     }
                 }
             }
