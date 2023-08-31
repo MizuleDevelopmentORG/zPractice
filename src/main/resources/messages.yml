@@ -6,4 +6,7 @@ sign-delete-usage: "<red>/sign delete"
 sign-not-exists: "<red>Failed to find sign at this location in database"
 sign-deleted: "<green>Successfully deleted queue sign."
 
+queue-joined: "<green>Successfully joined queue"
+queue-in-queue: "<red>You are already in queue."
+
 arena-starting: "<green>Round will start in %timer%".

@@ -25,4 +25,4 @@ sign-format:
   - "%name%"
   - "%kit%"
   - "%arena%"
-  - "%queue_player%/%queue_size%"
+  - "%players%/%max%"
