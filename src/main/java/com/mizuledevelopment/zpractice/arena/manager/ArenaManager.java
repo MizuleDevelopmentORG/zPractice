@@ -18,7 +18,6 @@ public class ArenaManager {
 
     private final zPractice plugin;
     private final Set<Arena> arenas = new HashSet<>();
-    private final Set<Arena> startingArenas = new HashSet<>();
 
 
     public ArenaManager(zPractice plugin) {
@@ -62,10 +61,6 @@ public class ArenaManager {
         return null;
     }
 
-    public Set<Arena> getStartingArenas() {
-        return startingArenas;
-    }
-
     public Arena find(UUID uniqueId) {
         for (Arena arena : arenas) {
             if (arena.getTeamOne().contains(uniqueId) || arena.getTeamTwo().contains(uniqueId)) {
@@ -83,5 +78,9 @@ public class ArenaManager {
         for (Map.Entry<Location, Material> map : arena.getBrokenBlocks().entrySet()) {
             map.getKey().getBlock().setType(map.getValue());
         }
+    }
+
+    public Set<Arena> getArenas() {
+        return arenas;
     }
 }

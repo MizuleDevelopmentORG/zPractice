@@ -75,7 +75,6 @@ public class ArenaHandler {
 
     public void start(){
         arena.setState(ArenaState.STARTING);
-        this.plugin.getArenaManager().getStartingArenas().add(arena);
 
         new BukkitRunnable() {
             @Override

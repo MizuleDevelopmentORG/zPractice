@@ -9,4 +9,12 @@ sign-deleted: "<green>Successfully deleted queue sign."
 queue-joined: "<green>Successfully joined queue"
 queue-in-queue: "<red>You are already in queue."
 
-arena-starting: "<green>Round will start in %timer%".
+arena-starting: "<green>Round will start in %timer%"
+arena-created: "<green>Successfully created Arena"
+arena-create-usage: "<red>/arena create <name>"
+arena-not-exists: "<red>Arena doesn't exists."
+arena-exists: "<red>Arena already exists."
+arena-delete-usage: "<red>/arena delete <name>"
+arena-deleted: "<green>Successfully deleted Arena"
+arena-location-set: "<green>Successfully set %position% location of Arena"
+

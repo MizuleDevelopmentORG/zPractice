@@ -2,6 +2,9 @@ package com.mizuledevelopment.zpractice;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mizuledevelopment.zpractice.arena.command.ArenaCreateCommand;
+import com.mizuledevelopment.zpractice.arena.command.ArenaDeleteCommand;
+import com.mizuledevelopment.zpractice.arena.command.ArenaSetLocationCommand;
 import com.mizuledevelopment.zpractice.arena.manager.ArenaManager;
 import com.mizuledevelopment.zpractice.kit.manager.KitManager;
 import com.mizuledevelopment.zpractice.listener.ProfileListener;
@@ -92,6 +95,12 @@ public final class zPractice extends JavaPlugin {
         signManager.addSubCommand(new SignCreateCommand(this));
         signManager.addSubCommand(new SignDeleteCommand(this));
         signManager.registerCommands();
+
+        CommandManager arenaManager = new CommandManager(this.getCommand("arena"));
+        arenaManager.addSubCommand(new ArenaCreateCommand(this));
+        arenaManager.addSubCommand(new ArenaDeleteCommand(this));
+        arenaManager.addSubCommand(new ArenaSetLocationCommand(this));
+        arenaManager.registerCommands();
     }
 
     public Config getConfiguration() {
