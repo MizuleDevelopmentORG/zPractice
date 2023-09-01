@@ -25,6 +25,8 @@ public class ArenaListener implements Listener {
         this.plugin = plugin;
     }
 
+    //todo PROBABLY RECODE
+
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
         Player player = event.getPlayer();
@@ -141,7 +143,7 @@ public class ArenaListener implements Listener {
                     }
 
                     for (UUID uuid : two) {
-                        if (this.plugin.getProfileManager().get(uuid).getArenaWins().isEmpty()
+                        if (this.plugin.getProfileManager().get(uuid).getArenaWins() == null
                             || !this.plugin.getProfileManager().get(uuid).getArenaWins().contains(arena.getName())) {
                             List<String> wins = new ArrayList<>();
                             wins.add(arena.getName() + ":1");
@@ -170,6 +172,7 @@ public class ArenaListener implements Listener {
                 arena.getTeamTwo().clear();
                 arena.getTeamOne().clear();
                 arena.setState(ArenaState.WAITING);
+                Bukkit.getConsoleSender().sendMessage("Resolved LAST");
             }
         }
     }

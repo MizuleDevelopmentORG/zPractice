@@ -1,10 +1,9 @@
 name: zPractice
-version: "${pluginVersion}"
+version: "1.0"
 main: com.mizuledevelopment.zpractice.zPractice
 api-version: "1.18"
-website: "${pluginWebsite}"
-author: "${pluginAuthor}"
-description: "${pluginDescription}"
+author: "KacperDev"
+description: "zPractice"
 commands:
   sign:
   arena:

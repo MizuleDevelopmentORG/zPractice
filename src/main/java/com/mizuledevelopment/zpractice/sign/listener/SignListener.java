@@ -39,7 +39,7 @@ public class SignListener implements Listener {
             if (dataSign != null) {
                 if (this.plugin.getQueueManager().containsPlayer(event.getPlayer().getUniqueId())) {
                     event.getPlayer().sendMessage(TextUtil.parse(this.plugin.getMessages()
-                        .getConfiguration().getString("queue-in-queue"), MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration()
+                        .getConfiguration().getString("queue-in-queue"), MessageType.from(Objects.requireNonNull(this.plugin.getMessages()
                         .getConfiguration().getString("queue-in-queue")))));
                     return;
                 }
@@ -65,7 +65,7 @@ public class SignListener implements Listener {
                         .getConfiguration().getString("queue-joined")))));
                     if (this.plugin.getQueueManager().get(dataSign.getName()).getPlayers().size() == dataSign.getMaxPlayers()) {
                         Queue queue = this.plugin.getQueueManager().get(dataSign.getName());
-                        if (this.plugin.getArenaManager().getArenaByName(dataSign.getName()).getState() == ArenaState.WAITING) {
+                        if (this.plugin.getArenaManager().getArenaByName(dataSign.getArena()).getState() == ArenaState.WAITING) {
                             ArenaHandler arenaHandler = new ArenaHandler(this.plugin.getArenaManager().getArenaByName(dataSign.getArena()), this.plugin);
 
                             arenaHandler.addPlayers(queue);

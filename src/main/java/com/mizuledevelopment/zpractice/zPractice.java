@@ -6,6 +6,7 @@ import com.mizuledevelopment.zpractice.arena.command.ArenaCreateCommand;
 import com.mizuledevelopment.zpractice.arena.command.ArenaDeleteCommand;
 import com.mizuledevelopment.zpractice.arena.command.ArenaSetKitCommand;
 import com.mizuledevelopment.zpractice.arena.command.ArenaSetLocationCommand;
+import com.mizuledevelopment.zpractice.arena.listener.ArenaListener;
 import com.mizuledevelopment.zpractice.arena.manager.ArenaManager;
 import com.mizuledevelopment.zpractice.kit.command.KitCreateCommand;
 import com.mizuledevelopment.zpractice.kit.command.KitDeleteCommand;
@@ -97,7 +98,8 @@ public final class zPractice extends JavaPlugin {
                 new ProfileListener(this),
                 new SignListener(this),
                 new TabListener(this),
-                new PlayerListener(this)
+                new PlayerListener(this),
+                new ArenaListener(this)
         ).forEach(listener -> pluginManager.registerEvents(listener, this));
     }
 

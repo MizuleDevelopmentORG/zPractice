@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>ElixirBoosters</name>
+    <name>zPractice</name>
 
     <properties>
         <java.version>17</java.version>

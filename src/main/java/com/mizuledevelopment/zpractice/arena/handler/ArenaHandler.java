@@ -10,6 +10,7 @@ import com.mizuledevelopment.zpractice.util.serializer.LocationSerializer;
 import com.mizuledevelopment.zpractice.zPractice;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,34 +62,57 @@ public class ArenaHandler {
 
             for (UUID uuid : this.arena.getTeamOne()) {
                 if (Bukkit.getPlayer(uuid) != null) {
-                    Objects.requireNonNull(Bukkit.getPlayer(uuid)).getInventory().addItem(ItemStackSerializer.deSerialize(items));
+                    if (ItemStackSerializer.deSerialize(items) != null) {
+                        Objects.requireNonNull(Bukkit.getPlayer(uuid)).getInventory().addItem(ItemStackSerializer.deSerialize(items));
+                    }
                 }
             }
 
             for (UUID uuid : this.arena.getTeamTwo()) {
                 if (Bukkit.getPlayer(uuid) != null) {
-                    Objects.requireNonNull(Bukkit.getPlayer(uuid)).getInventory().addItem(ItemStackSerializer.deSerialize(items));
+                    if (ItemStackSerializer.deSerialize(items) != null) {
+                        Objects.requireNonNull(Bukkit.getPlayer(uuid)).getInventory().addItem(ItemStackSerializer.deSerialize(items));
+                    }
                 }
             }
         }
     }
 
     public void start(){
+        Bukkit.broadcastMessage("start");
         arena.setState(ArenaState.STARTING);
 
-        new BukkitRunnable() {
+        Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
+
+            int i = plugin.getConfiguration().getConfiguration().getInt("starting-timer");
+
             @Override
             public void run() {
-                for (UUID uuid : arena.getTeamOne()) {
-                    if (uuid != null) {
-                        Objects.requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(TextUtil.parse(
-                            Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting"))
-                                .replace("%timer%", String.valueOf(plugin.getConfiguration().getConfiguration().getString("starting-timer"))),
-                            MessageType.from(Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting")))));
-                    }
+                i--;
+
+                if (i <= 0) {
+                    i = plugin.getConfiguration().getConfiguration().getInt("starting-timer");
+                    return;
                 }
+
+                for (UUID uuid : arena.getTeamOne()) {
+                    Objects.requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(TextUtil.parse(
+                        Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting"))
+                            .replace("%timer%", String.valueOf(i)),
+                        MessageType.from(Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting")))));
+                }
+
+                for (UUID uuid : arena.getTeamTwo()) {
+                    Objects.requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(TextUtil.parse(
+                        Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting"))
+                            .replace("%timer%", String.valueOf(i)),
+                        MessageType.from(Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting")))));
+                }
+
+                Bukkit.broadcastMessage("Running " + i);
             }
-        }.runTaskLater(this.plugin, (this.plugin.getConfiguration().getConfiguration().getInt("starting-timer")) * 20L);
+        }, 0L, 20L);
+
         arena.setState(ArenaState.GAME);
     }
 }
