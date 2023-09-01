@@ -11,7 +11,9 @@ import com.mizuledevelopment.zpractice.kit.command.KitCreateCommand;
 import com.mizuledevelopment.zpractice.kit.command.KitDeleteCommand;
 import com.mizuledevelopment.zpractice.kit.command.KitSetItemsCommand;
 import com.mizuledevelopment.zpractice.kit.manager.KitManager;
+import com.mizuledevelopment.zpractice.listener.PlayerListener;
 import com.mizuledevelopment.zpractice.listener.ProfileListener;
+import com.mizuledevelopment.zpractice.listener.TabListener;
 import com.mizuledevelopment.zpractice.mongo.MongoHandler;
 import com.mizuledevelopment.zpractice.profiles.manager.ProfileManager;
 import com.mizuledevelopment.zpractice.queue.manager.QueueManager;
@@ -19,6 +21,7 @@ import com.mizuledevelopment.zpractice.sign.command.SignCreateCommand;
 import com.mizuledevelopment.zpractice.sign.command.SignDeleteCommand;
 import com.mizuledevelopment.zpractice.sign.listener.SignListener;
 import com.mizuledevelopment.zpractice.sign.manager.DataSignManager;
+import com.mizuledevelopment.zpractice.tab.TabManager;
 import com.mizuledevelopment.zpractice.util.LazyLocation;
 import com.mizuledevelopment.zpractice.util.command.manager.CommandManager;
 import com.mizuledevelopment.zpractice.util.config.Config;
@@ -36,6 +39,7 @@ public final class zPractice extends JavaPlugin {
 
     private Config configuration;
     private Config messages;
+    private TabManager tabManager;
     private ProfileManager profileManager;
     private DataSignManager dataSignManager;
     private MongoHandler mongoHandler;
@@ -57,6 +61,7 @@ public final class zPractice extends JavaPlugin {
         this.listener(Bukkit.getPluginManager());
 
         this.mongoHandler = new MongoHandler(this.getConfiguration().getConfiguration().getString("mongo.uri"));
+        this.tabManager = new TabManager(this);
         this.profileManager = new ProfileManager(this);
         this.dataSignManager = new DataSignManager(this);
         this.kitManager = new KitManager(this);
@@ -90,7 +95,9 @@ public final class zPractice extends JavaPlugin {
     private void listener(PluginManager pluginManager) {
         Arrays.asList(
                 new ProfileListener(this),
-                new SignListener(this)
+                new SignListener(this),
+                new TabListener(this),
+                new PlayerListener(this)
         ).forEach(listener -> pluginManager.registerEvents(listener, this));
     }
 
@@ -144,5 +151,9 @@ public final class zPractice extends JavaPlugin {
 
     public KitManager getKitManager() {
         return kitManager;
+    }
+
+    public TabManager getTabManager() {
+        return tabManager;
     }
 }
