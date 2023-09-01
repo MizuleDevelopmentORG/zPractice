@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/IdeaProjects.zPractice.main.iml" filepath="$PROJECT_DIR$/.idea/modules/IdeaProjects.zPractice.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.mizuledevelopment.zpractice.zPractice.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.mizuledevelopment.zpractice.zPractice.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/zPractice-r.zPractice.main.iml" filepath="$PROJECT_DIR$/.idea/modules/zPractice-r.zPractice.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/zPractice.main.iml" filepath="$PROJECT_DIR$/.idea/modules/zPractice.main.iml" />
     </modules>
   </component>

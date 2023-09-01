@@ -15,7 +15,6 @@ public class Profile {
     private List<String> arenaLoses;
     private List<String> arenaKills;
     private List<String> arenaDeaths;
-    private List<String> customKits;
     private List<String> items1;
     private List<String> items2;
     private List<String> items3;
@@ -30,7 +29,6 @@ public class Profile {
         List<String> arenaLoses,
         List<String> arenaKills,
         List<String> arenaDeaths,
-        List<String> customKits,
         List<String> items1,
         List<String> items2,
         List<String> items3
@@ -44,7 +42,9 @@ public class Profile {
         this.arenaLoses = arenaLoses;
         this.arenaKills = arenaKills;
         this.arenaDeaths = arenaDeaths;
-        this.customKits = customKits;
+        this.items1 = items1;
+        this.items2 = items2;
+        this.items3 = items3;
     }
 
     public String getUuid() {
@@ -95,10 +95,6 @@ public class Profile {
         return items3;
     }
 
-    public List<String> getCustomKits() {
-        return customKits;
-    }
-
     public void setArenaLoses(final List<String> arenaLoses) {
         this.arenaLoses = arenaLoses;
     }
@@ -129,10 +125,6 @@ public class Profile {
 
     public void setWins(final int wins) {
         this.wins = wins;
-    }
-
-    public void setCustomKits(final List<String> customKits) {
-        this.customKits = customKits;
     }
 
     public void setItems1(final List<String> items1) {

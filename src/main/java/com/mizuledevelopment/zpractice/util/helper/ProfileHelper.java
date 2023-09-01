@@ -18,7 +18,6 @@ public class ProfileHelper {
                         document.getList("arenaLoses", String.class),
                         document.getList("arenaKills", String.class),
                         document.getList("arenaDeaths", String.class),
-                        document.getList("kits", String.class),
                         document.getList("items1", String.class),
                         document.getList("items2", String.class),
                         document.getList("items3", String.class));
@@ -35,7 +34,6 @@ public class ProfileHelper {
         document.put("arenaLoses", profile.getArenaLoses());
         document.put("arenaKills", profile.getArenaKills());
         document.put("arenaDeaths", profile.getArenaDeaths());
-        document.put("kits", profile.getCustomKits());
         document.put("items1", profile.getItems1());
         document.put("items2", profile.getItems2());
         document.put("items3", profile.getItems3());

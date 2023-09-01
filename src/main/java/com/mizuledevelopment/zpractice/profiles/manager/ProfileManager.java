@@ -50,7 +50,7 @@ public class ProfileManager {
     }
 
     public void createProfile(final String uuid) {
-        this.profiles.add(new Profile(uuid, 0, 0, 0, 0, null, null, null, null, null));
+        this.profiles.add(new Profile(uuid, 0, 0, 0, 0, null, null, null, null, null, null, null));
     }
 
     public Profile get(UUID uuid) {
