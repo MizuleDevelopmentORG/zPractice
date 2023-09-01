@@ -4,8 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mizuledevelopment.zpractice.arena.command.ArenaCreateCommand;
 import com.mizuledevelopment.zpractice.arena.command.ArenaDeleteCommand;
+import com.mizuledevelopment.zpractice.arena.command.ArenaSetKitCommand;
 import com.mizuledevelopment.zpractice.arena.command.ArenaSetLocationCommand;
 import com.mizuledevelopment.zpractice.arena.manager.ArenaManager;
+import com.mizuledevelopment.zpractice.kit.command.KitCreateCommand;
+import com.mizuledevelopment.zpractice.kit.command.KitDeleteCommand;
+import com.mizuledevelopment.zpractice.kit.command.KitSetItemsCommand;
 import com.mizuledevelopment.zpractice.kit.manager.KitManager;
 import com.mizuledevelopment.zpractice.listener.ProfileListener;
 import com.mizuledevelopment.zpractice.mongo.MongoHandler;
@@ -100,7 +104,14 @@ public final class zPractice extends JavaPlugin {
         arenaManager.addSubCommand(new ArenaCreateCommand(this));
         arenaManager.addSubCommand(new ArenaDeleteCommand(this));
         arenaManager.addSubCommand(new ArenaSetLocationCommand(this));
+        arenaManager.addSubCommand(new ArenaSetKitCommand(this));
         arenaManager.registerCommands();
+
+        CommandManager kitManager = new CommandManager(this.getCommand("kit"));
+        kitManager.addSubCommand(new KitCreateCommand(this));
+        kitManager.addSubCommand(new KitDeleteCommand(this));
+        kitManager.addSubCommand(new KitSetItemsCommand(this));
+        kitManager.registerCommands();
     }
 
     public Config getConfiguration() {
@@ -129,5 +140,9 @@ public final class zPractice extends JavaPlugin {
 
     public ArenaManager getArenaManager() {
         return arenaManager;
+    }
+
+    public KitManager getKitManager() {
+        return kitManager;
     }
 }

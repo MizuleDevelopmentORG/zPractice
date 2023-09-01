@@ -14,24 +14,24 @@ public class Arena {
     private List<String> kitItems;
     private int startingTimer;
     private List<UUID> teamOne, teamTwo;
-    private List<UUID> specatators;
+    private List<UUID> spectators;
     private List<Location> placedBlocks;
     private Map<Location, Material> brokenBlocks;
     private String locationOne, locationTwo;
 
-    public Arena(zPractice plugin, String name, String world, String locationOne, String locationTwo){
+    public Arena(zPractice plugin, String name, String world, String locationOne, String locationTwo, List<String> kitItems){
         this.startingTimer = plugin.getConfiguration().getConfiguration().getInt("starting-timer");
         this.name = name;
         this.world = world;
         this.locationOne = locationOne;
         this.locationTwo = locationTwo;
         this.state = ArenaState.WAITING;
-        this.kitItems = new ArrayList<>();
+        this.kitItems = kitItems;
         this.teamOne = new ArrayList<>();
         this.teamTwo = new ArrayList<>();
         this.brokenBlocks = new HashMap<>();
         this.placedBlocks = new ArrayList<>();
-        this.specatators = new ArrayList<>();
+        this.spectators = new ArrayList<>();
     }
 
     public String getName() {
@@ -123,10 +123,10 @@ public class Arena {
     }
 
     public List<UUID> getSpecatators() {
-        return specatators;
+        return spectators;
     }
 
-    public void setSpecatators(final List<UUID> specatators) {
-        this.specatators = specatators;
+    public void setSpectators(final List<UUID> specatators) {
+        this.spectators = specatators;
     }
 }

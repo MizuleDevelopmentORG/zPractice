@@ -35,4 +35,19 @@ public class KitManager {
         kits.forEach(kit -> this.plugin.getMongoHandler().getKits()
             .replaceOne(Filters.eq("name", kit.getName()), KitHelper.from(kit), new UpdateOptions().upsert(true)));
     }
+
+
+
+    public Kit get(String name) {
+        for (Kit kit : kits) {
+            if (kit.getName().equalsIgnoreCase(name)) {
+                return kit;
+            }
+        }
+        return null;
+    }
+
+    public Set<Kit> getKits() {
+        return kits;
+    }
 }

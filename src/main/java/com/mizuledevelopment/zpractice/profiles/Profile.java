@@ -16,6 +16,9 @@ public class Profile {
     private List<String> arenaKills;
     private List<String> arenaDeaths;
     private List<String> customKits;
+    private List<String> items1;
+    private List<String> items2;
+    private List<String> items3;
 
     public Profile(
         String uuid,
@@ -27,7 +30,10 @@ public class Profile {
         List<String> arenaLoses,
         List<String> arenaKills,
         List<String> arenaDeaths,
-        List<String> customKits
+        List<String> customKits,
+        List<String> items1,
+        List<String> items2,
+        List<String> items3
     ) {
         this.uuid = uuid;
         this.kills = kills;
@@ -77,6 +83,18 @@ public class Profile {
         return arenaWins;
     }
 
+    public List<String> getItems1() {
+        return items1;
+    }
+
+    public List<String> getItems2() {
+        return items2;
+    }
+
+    public List<String> getItems3() {
+        return items3;
+    }
+
     public List<String> getCustomKits() {
         return customKits;
     }
@@ -115,6 +133,18 @@ public class Profile {
 
     public void setCustomKits(final List<String> customKits) {
         this.customKits = customKits;
+    }
+
+    public void setItems1(final List<String> items1) {
+        this.items1 = items1;
+    }
+
+    public void setItems2(final List<String> items2) {
+        this.items2 = items2;
+    }
+
+    public void setItems3(final List<String> items3) {
+        this.items3 = items3;
     }
 }
 

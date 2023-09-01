@@ -3,14 +3,14 @@ package com.mizuledevelopment.zpractice.arena.listener;
 import com.mizuledevelopment.zpractice.arena.Arena;
 import com.mizuledevelopment.zpractice.arena.ArenaState;
 import com.mizuledevelopment.zpractice.zPractice;
+import io.papermc.paper.event.entity.EntityDamageItemEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +34,7 @@ public class ArenaListener implements Listener {
         if (arena != null) {
             List<UUID> one = arena.getTeamOne();
             List<UUID> two = arena.getTeamTwo();
+
             if (arena.getTeamOne().contains(player.getUniqueId())) {
                 arena.getTeamOne().remove(player.getUniqueId());
             } else {
@@ -161,6 +162,7 @@ public class ArenaListener implements Listener {
 
                 one.clear();
                 two.clear();
+                this.plugin.getQueueManager().get(arena.getName()).getPlayers().clear();
                 arena.setState(ArenaState.RESETTING);
                 this.plugin.getArenaManager().resetArena(arena);
                 arena.getPlacedBlocks().clear();
@@ -169,6 +171,40 @@ public class ArenaListener implements Listener {
                 arena.getTeamOne().clear();
                 arena.setState(ArenaState.WAITING);
             }
+        }
+    }
+
+    @EventHandler
+    public void onPvP(EntityDamageByBlockEvent event) {
+        if (event.getEntity() == null || !(event.getEntity() instanceof Player)) return;
+        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
+            event.setDamage(0);
+            event.setCancelled(true);
+        }
+    }
+    @EventHandler
+    public void onPvP(EntityDamageByEntityEvent event) {
+        if (event.getEntity() == null || !(event.getEntity() instanceof Player)) return;
+        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
+            event.setDamage(0);
+            event.setCancelled(true);
+        }
+    }
+    @EventHandler
+    public void onPvP(EntityDamageEvent event) {
+        if (event.getEntity() == null || !(event.getEntity() instanceof Player)) return;
+        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
+            event.setDamage(0);
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPvP(EntityDamageItemEvent event) {
+        if (event.getEntity() == null || !(event.getEntity() instanceof Player)) return;
+        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
+            event.setDamage(0);
+            event.setCancelled(true);
         }
     }
 }

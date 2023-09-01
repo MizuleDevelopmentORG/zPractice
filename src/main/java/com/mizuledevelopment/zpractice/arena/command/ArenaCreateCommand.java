@@ -32,7 +32,7 @@ public class ArenaCreateCommand extends Command {
             }
 
             this.plugin.getArenaManager().getArenas().add(new Arena(this.plugin, arenaName,
-                null, null, null));
+                null, null, null, null));
             sender.sendMessage(TextUtil.parse(this.plugin.getMessages().getConfiguration().getString("arena-created")
             ,MessageType.from(Objects.requireNonNull(this.plugin.getMessages().getConfiguration().getString("arena-created")))));
         }

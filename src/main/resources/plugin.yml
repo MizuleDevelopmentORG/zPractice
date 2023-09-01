@@ -7,3 +7,5 @@ author: "${pluginAuthor}"
 description: "${pluginDescription}"
 commands:
   sign:
+  arena:
+  kit:
