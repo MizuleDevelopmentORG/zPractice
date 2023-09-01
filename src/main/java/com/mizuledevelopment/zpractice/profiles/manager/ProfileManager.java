@@ -9,6 +9,7 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ReplaceOptions;
 import org.bson.Document;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -50,7 +51,7 @@ public class ProfileManager {
     }
 
     public void createProfile(final String uuid) {
-        this.profiles.add(new Profile(uuid, 0, 0, 0, 0, null, null, null, null, null, null, null));
+        this.profiles.add(new Profile(uuid, 0, 0, 0, 0, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
     }
 
     public Profile get(UUID uuid) {

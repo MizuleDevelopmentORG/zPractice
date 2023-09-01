@@ -93,6 +93,8 @@ public class ArenaListener implements Listener {
                         }
                     }
 
+                    //Cannot invoke "java.util.List.isEmpty()" because the return value of "com.mizuledevelopment.zpractice.profiles.Profile.getArenaWins()" is null
+
                     for (UUID uuid : two) {
                         if (this.plugin.getProfileManager().get(uuid).getArenaWins().isEmpty()
                             || !this.plugin.getProfileManager().get(uuid).getArenaLoses().contains(arena.getName())) {
@@ -180,7 +182,7 @@ public class ArenaListener implements Listener {
     @EventHandler
     public void onPvP(EntityDamageByBlockEvent event) {
         if (event.getEntity() == null || !(event.getEntity() instanceof Player)) return;
-        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
+        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()) != null && this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
             event.setDamage(0);
             event.setCancelled(true);
         }
@@ -188,7 +190,7 @@ public class ArenaListener implements Listener {
     @EventHandler
     public void onPvP(EntityDamageByEntityEvent event) {
         if (event.getEntity() == null || !(event.getEntity() instanceof Player)) return;
-        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
+        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()) != null && this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
             event.setDamage(0);
             event.setCancelled(true);
         }
@@ -196,7 +198,7 @@ public class ArenaListener implements Listener {
     @EventHandler
     public void onPvP(EntityDamageEvent event) {
         if (event.getEntity() == null || !(event.getEntity() instanceof Player)) return;
-        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
+        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()) != null &&this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
             event.setDamage(0);
             event.setCancelled(true);
         }
@@ -205,9 +207,15 @@ public class ArenaListener implements Listener {
     @EventHandler
     public void onPvP(EntityDamageItemEvent event) {
         if (event.getEntity() == null || !(event.getEntity() instanceof Player)) return;
-        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
+        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()) != null &&this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
             event.setDamage(0);
             event.setCancelled(true);
         }
     }
 }
+
+/*
+java.lang.NullPointerException: Cannot invoke "com.mizuledevelopment.zpractice.queue.Queue.getPlayers()" because the return value of "com.mizuledevelopment.zpractice.queue.manager.QueueManager.get(String)" is null
+	at com.mizuledevelopment.zpractice.arena.listener.ArenaListener.onDeath(ArenaListener.java:169) ~[mizuledevelopment-1.0-SNAPSHOT.jar:?]
+	at com.destroystokyo.paper.event.executor.asm.generated.GeneratedEventExecutor5.execute(Unknown Source) ~[?:?]
+ */

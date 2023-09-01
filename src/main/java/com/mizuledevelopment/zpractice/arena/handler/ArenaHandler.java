@@ -9,8 +9,6 @@ import com.mizuledevelopment.zpractice.util.serializer.ItemStackSerializer;
 import com.mizuledevelopment.zpractice.util.serializer.LocationSerializer;
 import com.mizuledevelopment.zpractice.zPractice;
 import org.bukkit.Bukkit;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +77,6 @@ public class ArenaHandler {
     }
 
     public void start(){
-        Bukkit.broadcastMessage("start");
         arena.setState(ArenaState.STARTING);
 
         Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
@@ -108,8 +105,6 @@ public class ArenaHandler {
                             .replace("%timer%", String.valueOf(i)),
                         MessageType.from(Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting")))));
                 }
-
-                Bukkit.broadcastMessage("Running " + i);
             }
         }, 0L, 20L);
 
