@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation("org.projectlombok:lombok:1.18.28")
     compileOnly(libs.paper)
     compileOnly(libs.annotations)
     api(libs.bstats.bukkit)
