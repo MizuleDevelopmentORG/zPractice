@@ -11,10 +11,6 @@ public class Profile {
     private int deaths;
     private int wins;
     private int loses;
-    private List<String> arenaWins;
-    private List<String> arenaLoses;
-    private List<String> arenaKills;
-    private List<String> arenaDeaths;
     private List<String> items1;
     private List<String> items2;
     private List<String> items3;
@@ -25,10 +21,6 @@ public class Profile {
         int deaths,
         int wins,
         int loses,
-        List<String> arenaWins,
-        List<String> arenaLoses,
-        List<String> arenaKills,
-        List<String> arenaDeaths,
         List<String> items1,
         List<String> items2,
         List<String> items3
@@ -38,10 +30,6 @@ public class Profile {
         this.wins = wins;
         this.loses = loses;
         this.deaths = deaths;
-        this.arenaWins = arenaWins;
-        this.arenaLoses = arenaLoses;
-        this.arenaKills = arenaKills;
-        this.arenaDeaths = arenaDeaths;
         this.items1 = items1;
         this.items2 = items2;
         this.items3 = items3;
@@ -67,22 +55,6 @@ public class Profile {
         return wins;
     }
 
-    public List<String> getArenaDeaths() {
-        return arenaDeaths;
-    }
-
-    public List<String> getArenaKills() {
-        return arenaKills;
-    }
-
-    public List<String> getArenaLoses() {
-        return arenaLoses;
-    }
-
-    public List<String> getArenaWins() {
-        return arenaWins;
-    }
-
     public List<String> getItems1() {
         return items1;
     }
@@ -93,22 +65,6 @@ public class Profile {
 
     public List<String> getItems3() {
         return items3;
-    }
-
-    public void setArenaLoses(final List<String> arenaLoses) {
-        this.arenaLoses = arenaLoses;
-    }
-
-    public void setArenaKills(final List<String> arenaKills) {
-        this.arenaKills = arenaKills;
-    }
-
-    public void setArenaDeaths(final List<String> arenaDeaths) {
-        this.arenaDeaths = arenaDeaths;
-    }
-
-    public void setArenaWins(final List<String> arenaWins) {
-        this.arenaWins = arenaWins;
     }
 
     public void setDeaths(final int deaths) {

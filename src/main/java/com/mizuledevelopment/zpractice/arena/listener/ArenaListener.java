@@ -7,15 +7,15 @@ import io.papermc.paper.event.entity.EntityDamageItemEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class ArenaListener implements Listener {
 
@@ -24,8 +24,6 @@ public class ArenaListener implements Listener {
     public ArenaListener(zPractice plugin) {
         this.plugin = plugin;
     }
-
-    //todo PROBABLY RECODE
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
@@ -42,6 +40,7 @@ public class ArenaListener implements Listener {
             } else {
                 arena.getTeamTwo().remove(player.getUniqueId());
             }
+
             player.setHealth(20);
             player.setFoodLevel(20);
             player.getInventory().clear();
@@ -65,107 +64,54 @@ public class ArenaListener implements Listener {
                 }
                 if (!arena.getTeamOne().isEmpty()) {
                     for (UUID uuid : arena.getTeamOne()) {
-                        player.setHealth(20);
-                        player.setFoodLevel(20);
-                        player.getInventory().clear();
-                        Objects.requireNonNull(Bukkit.getPlayer(uuid)).teleport(
-                            new Location(Bukkit.getWorld("world"),
-                                this.plugin.getConfiguration().getConfiguration().getInt("spawn.x"),
-                                this.plugin.getConfiguration().getConfiguration().getInt("spawn.y"),
-                                this.plugin.getConfiguration().getConfiguration().getInt("spawn.z")));
+                        if (Bukkit.getPlayer(uuid) != null) {
+                            Objects.requireNonNull(Bukkit.getPlayer(uuid)).setHealth(20);
+                            Objects.requireNonNull(Bukkit.getPlayer(uuid)).setFoodLevel(20);
+                            Objects.requireNonNull(Bukkit.getPlayer(uuid)).getInventory().clear();
+                            Objects.requireNonNull(Bukkit.getPlayer(uuid)).teleport(
+                                new Location(Bukkit.getWorld("world"),
+                                    this.plugin.getConfiguration().getConfiguration().getInt("spawn.x"),
+                                    this.plugin.getConfiguration().getConfiguration().getInt("spawn.y"),
+                                    this.plugin.getConfiguration().getConfiguration().getInt("spawn.z")));
+                        }
                     }
 
                     for (UUID uuid : one) {
-                        if (this.plugin.getProfileManager().get(uuid).getArenaWins().isEmpty()
-                            || !this.plugin.getProfileManager().get(uuid).getArenaWins().contains(arena.getName())) {
-                            List<String> wins = new ArrayList<>();
-                            wins.add(arena.getName() + ":1");
-                            this.plugin.getProfileManager().get(uuid).setArenaWins(wins);
-                        } else {
-                            List<String> wins = this.plugin.getProfileManager().get(uuid).getArenaWins();
-                            for (String s : wins) {
-                                if (s.contains(arena.getName())) {
-                                    String newS = arena.getName() + ":" + Integer.parseInt(s.split(":")[1]) + 1;
-                                    wins.remove(s);
-                                    wins.add(newS);
-                                }
-                            }
-                        }
+                        this.plugin.getProfileManager().get(uuid).setWins(this.plugin.getProfileManager().get(uuid).getWins() + 1);
                     }
 
-                    //Cannot invoke "java.util.List.isEmpty()" because the return value of "com.mizuledevelopment.zpractice.profiles.Profile.getArenaWins()" is null
-
                     for (UUID uuid : two) {
-                        if (this.plugin.getProfileManager().get(uuid).getArenaWins().isEmpty()
-                            || !this.plugin.getProfileManager().get(uuid).getArenaLoses().contains(arena.getName())) {
-                            List<String> loses = new ArrayList<>();
-                            loses.add(arena.getName() + ":1");
-                            this.plugin.getProfileManager().get(uuid).setArenaLoses(loses);
-                        } else {
-                            List<String> loses = this.plugin.getProfileManager().get(uuid).getArenaLoses();
-                            for (String s : loses) {
-                                if (s.contains(arena.getName())) {
-                                    String newS = arena.getName() + ":" + Integer.parseInt(s.split(":")[1]) + 1;
-                                    loses.remove(s);
-                                    loses.add(newS);
-                                }
-                            }
-                        }
+                        this.plugin.getProfileManager().get(uuid).setLoses(this.plugin.getProfileManager().get(uuid).getLoses() + 1);
                     }
                 }
 
                 if (!arena.getTeamTwo().isEmpty()) {
                     for (UUID uuid : arena.getTeamTwo()) {
-                        player.setHealth(20);
-                        player.setFoodLevel(20);
-                        player.getInventory().clear();
-                        Objects.requireNonNull(Bukkit.getPlayer(uuid)).teleport(
-                            new Location(Bukkit.getWorld("world"),
-                                this.plugin.getConfiguration().getConfiguration().getInt("spawn.x"),
-                                this.plugin.getConfiguration().getConfiguration().getInt("spawn.y"),
-                                this.plugin.getConfiguration().getConfiguration().getInt("spawn.z")));
+                        if (Bukkit.getPlayer(uuid) != null) {
+                            Objects.requireNonNull(Bukkit.getPlayer(uuid)).setHealth(20);
+                            Objects.requireNonNull(Bukkit.getPlayer(uuid)).setFoodLevel(20);
+                            Objects.requireNonNull(Bukkit.getPlayer(uuid)).getInventory().clear();
+                            Objects.requireNonNull(Bukkit.getPlayer(uuid)).teleport(
+                                new Location(Bukkit.getWorld("world"),
+                                    this.plugin.getConfiguration().getConfiguration().getInt("spawn.x"),
+                                    this.plugin.getConfiguration().getConfiguration().getInt("spawn.y"),
+                                    this.plugin.getConfiguration().getConfiguration().getInt("spawn.z")));
+                        }
                     }
 
                     for (UUID uuid : one) {
-                        if (this.plugin.getProfileManager().get(uuid).getArenaLoses().isEmpty()
-                            || !this.plugin.getProfileManager().get(uuid).getArenaLoses().contains(arena.getName())) {
-                            List<String> loses = new ArrayList<>();
-                            loses.add(arena.getName() + ":1");
-                            this.plugin.getProfileManager().get(uuid).setArenaWins(loses);
-                        } else {
-                            List<String> loses = this.plugin.getProfileManager().get(uuid).getArenaLoses();
-                            for (String s : loses) {
-                                if (s.contains(arena.getName())) {
-                                    String newS = arena.getName() + ":" + Integer.parseInt(s.split(":")[1]) + 1;
-                                    loses.remove(s);
-                                    loses.add(newS);
-                                }
-                            }
-                        }
+                        this.plugin.getProfileManager().get(uuid).setLoses(this.plugin.getProfileManager().get(uuid).getLoses() + 1);
                     }
 
                     for (UUID uuid : two) {
-                        if (this.plugin.getProfileManager().get(uuid).getArenaWins() == null
-                            || !this.plugin.getProfileManager().get(uuid).getArenaWins().contains(arena.getName())) {
-                            List<String> wins = new ArrayList<>();
-                            wins.add(arena.getName() + ":1");
-                            this.plugin.getProfileManager().get(uuid).setArenaWins(wins);
-                        } else {
-                            List<String> wins = this.plugin.getProfileManager().get(uuid).getArenaWins();
-                            for (String s : wins) {
-                                if (s.contains(arena.getName())) {
-                                    String newS = arena.getName() + ":" + Integer.parseInt(s.split(":")[1]) + 1;
-                                    wins.remove(s);
-                                    wins.add(newS);
-                                }
-                            }
-                        }
+                        this.plugin.getProfileManager().get(uuid).setWins(this.plugin.getProfileManager().get(uuid).getWins() + 1);
                     }
                 }
 
 
                 one.clear();
                 two.clear();
+
                 this.plugin.getQueueManager().get(arena.getName()).getPlayers().clear();
                 arena.setState(ArenaState.RESETTING);
                 this.plugin.getArenaManager().resetArena(arena);
@@ -174,7 +120,6 @@ public class ArenaListener implements Listener {
                 arena.getTeamTwo().clear();
                 arena.getTeamOne().clear();
                 arena.setState(ArenaState.WAITING);
-                Bukkit.getConsoleSender().sendMessage("Resolved LAST");
             }
         }
     }
@@ -212,10 +157,20 @@ public class ArenaListener implements Listener {
             event.setCancelled(true);
         }
     }
-}
 
-/*
-java.lang.NullPointerException: Cannot invoke "com.mizuledevelopment.zpractice.queue.Queue.getPlayers()" because the return value of "com.mizuledevelopment.zpractice.queue.manager.QueueManager.get(String)" is null
-	at com.mizuledevelopment.zpractice.arena.listener.ArenaListener.onDeath(ArenaListener.java:169) ~[mizuledevelopment-1.0-SNAPSHOT.jar:?]
-	at com.destroystokyo.paper.event.executor.asm.generated.GeneratedEventExecutor5.execute(Unknown Source) ~[?:?]
- */
+    @EventHandler
+    public void onPlace(BlockPlaceEvent event) {
+        if (this.plugin.getArenaManager().find(event.getPlayer().getUniqueId()) != null) {
+            List<Location> placed =  this.plugin.getArenaManager().find(event.getPlayer().getUniqueId()).getPlacedBlocks();
+            placed.add(event.getBlockPlaced().getLocation());
+        }
+    }
+
+    @EventHandler
+    public void onBreak(BlockBreakEvent event) {
+        if (this.plugin.getArenaManager().find(event.getPlayer().getUniqueId()) != null) {
+            Map<Location, Material> map = this.plugin.getArenaManager().find(event.getPlayer().getUniqueId()).getBrokenBlocks();
+            map.put(event.getBlock().getLocation(), event.getBlock().getType());
+        }
+    }
+}

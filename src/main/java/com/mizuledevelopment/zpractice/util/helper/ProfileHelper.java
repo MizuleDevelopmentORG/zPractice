@@ -14,10 +14,6 @@ public class ProfileHelper {
                         document.getInteger("deaths"),
                         document.getInteger("wins"),
                         document.getInteger("loses"),
-                        document.getList("arenaWins", String.class),
-                        document.getList("arenaLoses", String.class),
-                        document.getList("arenaKills", String.class),
-                        document.getList("arenaDeaths", String.class),
                         document.getList("items1", String.class),
                         document.getList("items2", String.class),
                         document.getList("items3", String.class));
@@ -30,10 +26,6 @@ public class ProfileHelper {
         document.put("deaths", profile.getDeaths());
         document.put("wins", profile.getWins());
         document.put("loses", profile.getLoses());
-        document.put("arenaWins", profile.getArenaWins());
-        document.put("arenaLoses", profile.getArenaLoses());
-        document.put("arenaKills", profile.getArenaKills());
-        document.put("arenaDeaths", profile.getArenaDeaths());
         document.put("items1", profile.getItems1());
         document.put("items2", profile.getItems2());
         document.put("items3", profile.getItems3());
