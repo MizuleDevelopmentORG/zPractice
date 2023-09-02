@@ -1,9 +1,12 @@
 package io.github.thatkawaiisam.assemble;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import lombok.Setter;
+
+import java.util.List;
 
 public class AssembleBoardEntry {
 
@@ -11,7 +14,7 @@ public class AssembleBoardEntry {
 
 	private Team team;
 	@Setter
-	private String text, identifier;
+    private String identifier, text;
 
 	/**
 	 * Assemble Board Entry
@@ -72,9 +75,14 @@ public class AssembleBoardEntry {
 	 */
 	public void send(int position) {
 		// Set Prefix & Suffix.
-		String[] split = AssembleUtils.splitTeamText(text);
+		List<Component> split = AssembleUtils.splitTeamText(text);
+        this.team.prefix(split.get(0));
+        this.team.suffix(split.get(1));
+        /*
+                String[] split = AssembleUtils.splitTeamText(text);
 		this.team.setPrefix(split[0]);
 		this.team.setSuffix(split[1]);
+         */
 
 		// Set the score
 		this.board.getObjective().getScore(this.identifier).setScore(position);

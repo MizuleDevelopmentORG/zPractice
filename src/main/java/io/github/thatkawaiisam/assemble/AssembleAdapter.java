@@ -1,6 +1,8 @@
 package io.github.thatkawaiisam.assemble;
 
 import java.util.List;
+
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 
 public interface AssembleAdapter {

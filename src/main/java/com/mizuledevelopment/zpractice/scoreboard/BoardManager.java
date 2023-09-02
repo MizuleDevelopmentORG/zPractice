@@ -4,7 +4,6 @@ import com.mizuledevelopment.zpractice.util.color.MessageType;
 import com.mizuledevelopment.zpractice.util.color.TextUtil;
 import com.mizuledevelopment.zpractice.zPractice;
 import io.github.thatkawaiisam.assemble.AssembleAdapter;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
@@ -24,18 +23,26 @@ public class BoardManager implements AssembleAdapter {
 
     @Override
     public String getTitle(final Player player) {
-
         return LegacyComponentSerializer.legacyAmpersand().serialize(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("scoreboard.title"),
             MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("scoreboard.title")))));
     }
 
     @Override
     public List<String> getLines(final Player player) {
-        List<String> lines = new ArrayList<>();
-        List<String> toReturn = new ArrayList<>();
+        List<String> components = new ArrayList<>();
 
-        lines.add("<red>hey");
+        /*
+                this.plugin.getConfiguration().getConfiguration().getStringList("scoreboard.lines").forEach(line -> {
+            components.add((LegacyComponentSerializer.legacySection().serialize(TextUtil.parse(line, MessageType.from(line)))));
+        });
 
-        return lines;
+         */
+
+        for (final String string : this.plugin.getConfiguration().getConfiguration().getStringList("scoreboard.lines")) {
+            components.add(string.replace("%player%", player.getName())
+                .replace("%online%", String.valueOf(Bukkit.getOnlinePlayers().size())));
+        }
+
+        return components;
     }
 }

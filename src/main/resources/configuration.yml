@@ -11,11 +11,14 @@ spawn:
   z: 0
 
 scoreboard:
-  title: "<rainbow>heyhey"
+  title: "<blue>Mizule <grey>Practice"
   lines:
-    - "<rainbow>line1"
-    - "<rainbow>player %player%"
-    - "<rainbow>online %online%"
+    - " "
+    - "<rainbow>Player: %player%"
+    - " "
+    - "<rainbow>Online: %online%"
+    - " "
+    - "store.example.net"
 
 tab:
   header:

@@ -1,10 +1,12 @@
 package io.github.thatkawaiisam.assemble;
 
+import net.kyori.adventure.text.Component;;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,8 +65,7 @@ public class AssembleThread extends Thread {
                     objective.setDisplayName(title);
                 }
 
-                List<String> newLines = this.assemble.getAdapter().getLines(player);
-
+                List<String> newLines = new ArrayList<>(this.assemble.getAdapter().getLines(player));
                 // Allow adapter to return null/empty list to display nothing.
                 if (newLines == null || newLines.isEmpty()) {
                     board.getEntries().forEach(AssembleBoardEntry::remove);
@@ -96,7 +97,7 @@ public class AssembleThread extends Thread {
                         AssembleBoardEntry entry = board.getEntryAtPosition(i);
 
                         // Translate any colors.
-                        String line = ChatColor.translateAlternateColorCodes('&', newLines.get(i));
+                        String line = newLines.get(i);
 
                         // If the entry is null, just create a new one.
                         // Creating a new AssembleBoardEntry instance will add
