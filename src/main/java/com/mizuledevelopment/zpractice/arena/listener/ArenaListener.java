@@ -8,10 +8,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 
@@ -125,52 +127,27 @@ public class ArenaListener implements Listener {
     }
 
     @EventHandler
-    public void onPvP(EntityDamageByBlockEvent event) {
-        if (event.getEntity() == null || !(event.getEntity() instanceof Player)) return;
-        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()) != null && this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
-            event.setDamage(0);
-            event.setCancelled(true);
-        }
-    }
-    @EventHandler
-    public void onPvP(EntityDamageByEntityEvent event) {
-        if (event.getEntity() == null || !(event.getEntity() instanceof Player)) return;
-        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()) != null && this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
-            event.setDamage(0);
-            event.setCancelled(true);
-        }
-    }
-    @EventHandler
-    public void onPvP(EntityDamageEvent event) {
-        if (event.getEntity() == null || !(event.getEntity() instanceof Player)) return;
-        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()) != null &&this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
-            event.setDamage(0);
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onPvP(EntityDamageItemEvent event) {
-        if (event.getEntity() == null || !(event.getEntity() instanceof Player)) return;
-        if (this.plugin.getArenaManager().find(event.getEntity().getUniqueId()) != null &&this.plugin.getArenaManager().find(event.getEntity().getUniqueId()).getState() == ArenaState.STARTING) {
-            event.setDamage(0);
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
     public void onPlace(BlockPlaceEvent event) {
         if (this.plugin.getArenaManager().find(event.getPlayer().getUniqueId()) != null) {
-            List<Location> placed =  this.plugin.getArenaManager().find(event.getPlayer().getUniqueId()).getPlacedBlocks();
-            placed.add(event.getBlockPlaced().getLocation());
+            this.plugin.getArenaManager().find(event.getPlayer().getUniqueId()).getPlacedBlocks().add(event.getBlockPlaced().getLocation());
         }
     }
 
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
         if (this.plugin.getArenaManager().find(event.getPlayer().getUniqueId()) != null) {
-            Map<Location, Material> map = this.plugin.getArenaManager().find(event.getPlayer().getUniqueId()).getBrokenBlocks();
-            map.put(event.getBlock().getLocation(), event.getBlock().getType());
+            this.plugin.getArenaManager().find(event.getPlayer().getUniqueId()).getBrokenBlocks().put(event.getBlock().getLocation(), event.getBlock().getType());
+        }
+    }
+
+    @EventHandler
+    public void onExplosion(EntityExplodeEvent event){
+        if (event.getEntity() != null && event.getEntity() instanceof final Player player) {
+            if (this.plugin.getArenaManager().find(player.getUniqueId()) != null) {
+                for (Block block : event.blockList()) {
+                    this.plugin.getArenaManager().find(player.getUniqueId()).getBrokenBlocks().put(block.getLocation(), block.getType());
+                }
+            }
         }
     }
 }

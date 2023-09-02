@@ -10,6 +10,23 @@ spawn:
   y: 100
   z: 0
 
+scoreboard:
+  title: "<rainbow>heyhey"
+  lines:
+    - "<rainbow>line1"
+    - "<rainbow>player %player%"
+    - "<rainbow>online %online%"
+
+tab:
+  header:
+    - "hey"
+    - "<red>byte"
+    - "hey"
+  footer:
+    - "hey"
+    - "<red>byte"
+    - "hey"
+
 selector:
   item: ""
   enchantments:

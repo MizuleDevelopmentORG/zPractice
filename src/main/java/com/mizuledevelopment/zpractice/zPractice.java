@@ -18,6 +18,7 @@ import com.mizuledevelopment.zpractice.listener.TabListener;
 import com.mizuledevelopment.zpractice.mongo.MongoHandler;
 import com.mizuledevelopment.zpractice.profiles.manager.ProfileManager;
 import com.mizuledevelopment.zpractice.queue.manager.QueueManager;
+import com.mizuledevelopment.zpractice.scoreboard.BoardManager;
 import com.mizuledevelopment.zpractice.sign.command.SignCreateCommand;
 import com.mizuledevelopment.zpractice.sign.command.SignDeleteCommand;
 import com.mizuledevelopment.zpractice.sign.listener.SignListener;
@@ -27,6 +28,8 @@ import com.mizuledevelopment.zpractice.util.LazyLocation;
 import com.mizuledevelopment.zpractice.util.command.manager.CommandManager;
 import com.mizuledevelopment.zpractice.util.config.Config;
 import com.mizuledevelopment.zpractice.util.serializer.LazyLocationTypeSerializer;
+import io.github.thatkawaiisam.assemble.Assemble;
+import io.github.thatkawaiisam.assemble.AssembleStyle;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -60,6 +63,7 @@ public final class zPractice extends JavaPlugin {
         this.configuration();
         this.command();
         this.listener(Bukkit.getPluginManager());
+        this.scoreboard();
 
         this.mongoHandler = new MongoHandler(this.getConfiguration().getConfiguration().getString("mongo.uri"));
         this.tabManager = new TabManager(this);
@@ -121,6 +125,12 @@ public final class zPractice extends JavaPlugin {
         kitManager.addSubCommand(new KitDeleteCommand(this));
         kitManager.addSubCommand(new KitSetItemsCommand(this));
         kitManager.registerCommands();
+    }
+
+    private void scoreboard(){
+        Assemble assemble = new Assemble(this, new BoardManager(this));
+        assemble.setAssembleStyle(AssembleStyle.KOHI);
+        assemble.setTicks(2);
     }
 
     public Config getConfiguration() {

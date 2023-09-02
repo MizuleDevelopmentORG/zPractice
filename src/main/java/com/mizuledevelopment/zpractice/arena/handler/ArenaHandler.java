@@ -77,37 +77,18 @@ public class ArenaHandler {
     }
 
     public void start(){
-        arena.setState(ArenaState.STARTING);
-
-        Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
-
-            int i = plugin.getConfiguration().getConfiguration().getInt("starting-timer");
-
-            @Override
-            public void run() {
-                i--;
-
-                if (i <= 0) {
-                    i = plugin.getConfiguration().getConfiguration().getInt("starting-timer");
-                    return;
-                }
-
-                for (UUID uuid : arena.getTeamOne()) {
-                    Objects.requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(TextUtil.parse(
-                        Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting"))
-                            .replace("%timer%", String.valueOf(i)),
-                        MessageType.from(Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting")))));
-                }
-
-                for (UUID uuid : arena.getTeamTwo()) {
-                    Objects.requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(TextUtil.parse(
-                        Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting"))
-                            .replace("%timer%", String.valueOf(i)),
-                        MessageType.from(Objects.requireNonNull(plugin.getMessages().getConfiguration().getString("arena-starting")))));
-                }
-            }
-        }, 0L, 20L);
-
         arena.setState(ArenaState.GAME);
+        for (UUID uuid : arena.getTeamOne()) {
+            if (Bukkit.getPlayer(uuid) != null) {
+                Objects.requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(TextUtil.parse(this.plugin.getMessages().getConfiguration().getString("arena-started"),
+                    MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("arena-started")))));
+            }
+        }
+        for (UUID uuid : arena.getTeamTwo()) {
+            if (Bukkit.getPlayer(uuid) != null) {
+                Objects.requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(TextUtil.parse(this.plugin.getMessages().getConfiguration().getString("arena-started"),
+                    MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("arena-started")))));
+            }
+        }
     }
 }

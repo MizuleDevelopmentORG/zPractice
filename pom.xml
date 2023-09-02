@@ -64,21 +64,39 @@
     </repositories>
 
     <dependencies>
+
+        <!-- PAPER -->
+
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
             <version>1.19.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- MINIMESSAGE -->
+
         <dependency>
             <groupId>io.github.miniplaceholders</groupId>
             <artifactId>miniplaceholders-api</artifactId>
             <version>2.1.0</version>
         </dependency>
+
+        <!-- MONGO -->
+
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
             <version>3.12.12</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- LOMBOK -->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.28</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

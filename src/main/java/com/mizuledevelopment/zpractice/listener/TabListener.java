@@ -1,10 +1,13 @@
 package com.mizuledevelopment.zpractice.listener;
 
 import com.mizuledevelopment.zpractice.zPractice;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import java.util.Objects;
 
 public class TabListener implements Listener {
 
@@ -17,7 +20,10 @@ public class TabListener implements Listener {
     @EventHandler
     @Deprecated
     public void onJoin(PlayerJoinEvent event) {
-        event.getPlayer().setPlayerListHeaderFooter(LegacyComponentSerializer.legacyAmpersand().serialize(this.plugin.getTabManager().getHeader()),
-            LegacyComponentSerializer.legacyAmpersand().serialize(this.plugin.getTabManager().getFooter()));
+        //            case LEGACY -> LegacyComponentSerializer.legacyAmpersand().deserializeOr(input, Component.empty());
+        /*
+        Objects.requireNonNull(event.getPlayer().playerListHeader()).append(this.plugin.getTabManager().getHeader());
+        Objects.requireNonNull(event.getPlayer().playerListFooter()).append(this.plugin.getTabManager().getFooter());
+        */
     }
 }
