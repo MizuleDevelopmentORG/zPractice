@@ -1,6 +1,9 @@
 package com.mizuledevelopment.zpractice.listener;
 
+import com.mizuledevelopment.zpractice.util.items.Items;
 import com.mizuledevelopment.zpractice.zPractice;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -16,5 +19,16 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
 
+        event.getPlayer().teleport(new Location(Bukkit.getWorld("world"),
+            this.plugin.getConfiguration().getConfiguration().getInt("spawn.x"),
+            this.plugin.getConfiguration().getConfiguration().getInt("spawn.y"),
+            this.plugin.getConfiguration().getConfiguration().getInt("spawn.z")));
+
+        event.getPlayer().getInventory().setItem(
+            this.plugin.getConfiguration().getConfiguration().getInt("selector.slot"), Items.SELECTOR(this.plugin));
+        event.getPlayer().getInventory().setItem(
+            this.plugin.getConfiguration().getConfiguration().getInt("kit.slot"), Items.KIT(this.plugin));
+        event.getPlayer().getInventory().setItem(
+            this.plugin.getConfiguration().getConfiguration().getInt("statistics.slot"), Items.STATS(this.plugin));
     }
 }

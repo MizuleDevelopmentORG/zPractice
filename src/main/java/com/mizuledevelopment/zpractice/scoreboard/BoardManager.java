@@ -31,13 +31,6 @@ public class BoardManager implements AssembleAdapter {
     public List<String> getLines(final Player player) {
         List<String> components = new ArrayList<>();
 
-        /*
-                this.plugin.getConfiguration().getConfiguration().getStringList("scoreboard.lines").forEach(line -> {
-            components.add((LegacyComponentSerializer.legacySection().serialize(TextUtil.parse(line, MessageType.from(line)))));
-        });
-
-         */
-
         for (final String string : this.plugin.getConfiguration().getConfiguration().getStringList("scoreboard.lines")) {
             components.add(string.replace("%player%", player.getName())
                 .replace("%online%", String.valueOf(Bukkit.getOnlinePlayers().size())));
