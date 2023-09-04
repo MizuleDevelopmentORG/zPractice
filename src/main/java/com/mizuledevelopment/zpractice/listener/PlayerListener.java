@@ -8,6 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.util.Objects;
+
 public class PlayerListener implements Listener {
 
     private final zPractice plugin;
@@ -19,7 +21,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
 
-        event.getPlayer().teleport(new Location(Bukkit.getWorld("world"),
+        event.getPlayer().teleport(new Location(Bukkit.getWorld(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("spawn.world"))),
             this.plugin.getConfiguration().getConfiguration().getInt("spawn.x"),
             this.plugin.getConfiguration().getConfiguration().getInt("spawn.y"),
             this.plugin.getConfiguration().getConfiguration().getInt("spawn.z")));

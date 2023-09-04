@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -20,11 +21,17 @@ public class Items {
         plugin.getConfiguration().getConfiguration().getStringList("selector.enchantments")
                 .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
         ItemMeta meta = itemStack.getItemMeta();
+        meta.getPersistentDataContainer().set(plugin.getNamespacedKey(), PersistentDataType.STRING, "selector");
         meta.displayName(TextUtil.parse(plugin.getConfiguration().getConfiguration().getString("selector.name"),
                 MessageType.from(Objects.requireNonNull(plugin.getConfiguration().getConfiguration().getString("selector.name")))));
         ArrayList<Component> lore = new ArrayList<>();
-        plugin.getConfiguration().getConfiguration().getStringList("selector.lore")
-                .forEach(line -> lore.add(TextUtil.parse(line, MessageType.from(line))));
+        for (String line : plugin.getConfiguration().getConfiguration().getStringList("selector.lore")) {
+            if (!line.isEmpty()) {
+                lore.add(TextUtil.parse(line, MessageType.from(line)));
+            } else {
+                lore.add(Component.text(" "));
+            }
+        }
         meta.lore(lore);
         itemStack.setItemMeta(meta);
         return itemStack;
@@ -36,11 +43,17 @@ public class Items {
         plugin.getConfiguration().getConfiguration().getStringList("kit.enchantments")
             .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
         ItemMeta meta = itemStack.getItemMeta();
+        meta.getPersistentDataContainer().set(plugin.getNamespacedKey(), PersistentDataType.STRING, "kit");
         meta.displayName(TextUtil.parse(plugin.getConfiguration().getConfiguration().getString("kit.name"),
             MessageType.from(Objects.requireNonNull(plugin.getConfiguration().getConfiguration().getString("kit.name")))));
         ArrayList<Component> lore = new ArrayList<>();
-        plugin.getConfiguration().getConfiguration().getStringList("kit.lore")
-            .forEach(line -> lore.add(TextUtil.parse(line, MessageType.from(line))));
+        for (String line : plugin.getConfiguration().getConfiguration().getStringList("kit.lore")) {
+            if (!line.isEmpty()) {
+                lore.add(TextUtil.parse(line, MessageType.from(line)));
+            } else {
+                lore.add(Component.text(" "));
+            }
+        }
         meta.lore(lore);
         itemStack.setItemMeta(meta);
         return itemStack;
@@ -52,11 +65,17 @@ public class Items {
         plugin.getConfiguration().getConfiguration().getStringList("statistics.enchantments")
             .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
         ItemMeta meta = itemStack.getItemMeta();
+        meta.getPersistentDataContainer().set(plugin.getNamespacedKey(), PersistentDataType.STRING, "stats");
         meta.displayName(TextUtil.parse(plugin.getConfiguration().getConfiguration().getString("statistics.name"),
             MessageType.from(Objects.requireNonNull(plugin.getConfiguration().getConfiguration().getString("statistics.name")))));
         ArrayList<Component> lore = new ArrayList<>();
-        plugin.getConfiguration().getConfiguration().getStringList("statistics.lore")
-            .forEach(line -> lore.add(TextUtil.parse(line, MessageType.from(line))));
+        for (String line : plugin.getConfiguration().getConfiguration().getStringList("statistics.lore")) {
+            if (!line.isEmpty()) {
+                lore.add(TextUtil.parse(line, MessageType.from(line)));
+            } else {
+                lore.add(Component.text(" "));
+            }
+        }
         meta.lore(lore);
         itemStack.setItemMeta(meta);
         return itemStack;

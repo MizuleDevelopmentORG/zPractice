@@ -1,11 +1,10 @@
-license: ""
-
 mongo:
   uri: "mongodb://158.69.163.121:42741/"
 
 starting-timer: 15
 
 spawn:
+  world: "world"
   x: 0
   y: 100
   z: 0
@@ -31,15 +30,93 @@ tab:
     - "hey"
 
 selector:
-  item: ""
+  item: "COMPASS"
   enchantments:
-  name: ""
+    - "DURABILITY:10"
+  name: "<red>Server Selector"
   lore:
     - ""
-    - ""
+    - "<grey>Right click to go to server"
     - ""
   slot: 1
   amount: 1
+kit:
+  item: "BOOK"
+  enchantments:
+    - "DURABILITY:10"
+  name: "<red>Kit Selector"
+  lore:
+    - ""
+    - "<grey>Right click to go for kits"
+    - ""
+  slot: 2
+  amount: 1
+statistics:
+  item: "DIAMOND_SWORD"
+  enchantments:
+    - "DURABILITY:10"
+  name: "<red>Statistics Viewer"
+  lore:
+    - ""
+    - "<grey>Right click to view stats"
+    - ""
+  slot: 3
+  amount: 1
+
+inventory:
+  selector:
+    title: "<red>Selector Inventory"
+    size: 54
+    items:
+      1:
+        item: "DIAMOND_SWORD"
+        name: "<red>Test Game"
+        enchantments:
+          - "DURABILITY:10"
+        lore:
+          - "<red>test"
+          - "<red>test"
+          - ""
+        amount: 1
+        slot: 1
+        spawn-world: "world"
+        spawn-x: 100
+        spawn-y: 100
+        spawn-z: 100
+  kit:
+    title: "<red>Kits Inventory"
+    size: 54
+    items:
+      1:
+        item: "DIAMOND_SWORD"
+        name: "<red>Test Kit"
+        enchantments:
+          - "DURABILITY:10"
+        lore:
+          - "<red>test"
+          - "<red>test"
+          - ""
+        amount: 1
+        slot: 1
+  statistics:
+    title: "<red>Statistics Inventory"
+    size: 54
+    items:
+      1:
+        item: "DIAMOND_SWORD"
+        name: "<red>Statistics"
+        enchantments:
+          - "DURABILITY:10"
+        lore:
+          - ""
+          - "<red>Player %player%"
+          - "<red>Kills %kills%"
+          - "<red>Deaths %deaths%"
+          - "<red>Wins %wins%"
+          - "<red>Loses %loses%"
+          - ""
+        amount: 1
+        slot: 1
 
 sign-format:
   - "%name%"

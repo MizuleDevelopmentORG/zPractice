@@ -12,9 +12,7 @@ import com.mizuledevelopment.zpractice.kit.command.KitCreateCommand;
 import com.mizuledevelopment.zpractice.kit.command.KitDeleteCommand;
 import com.mizuledevelopment.zpractice.kit.command.KitSetItemsCommand;
 import com.mizuledevelopment.zpractice.kit.manager.KitManager;
-import com.mizuledevelopment.zpractice.listener.PlayerListener;
-import com.mizuledevelopment.zpractice.listener.ProfileListener;
-import com.mizuledevelopment.zpractice.listener.TabListener;
+import com.mizuledevelopment.zpractice.listener.*;
 import com.mizuledevelopment.zpractice.mongo.MongoHandler;
 import com.mizuledevelopment.zpractice.profiles.manager.ProfileManager;
 import com.mizuledevelopment.zpractice.queue.manager.QueueManager;
@@ -32,6 +30,7 @@ import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -41,6 +40,7 @@ import java.util.Arrays;
 
 public final class zPractice extends JavaPlugin {
 
+    private final NamespacedKey namespacedKey = new NamespacedKey(this, "type");
     private Config configuration;
     private Config messages;
     private TabManager tabManager;
@@ -103,7 +103,9 @@ public final class zPractice extends JavaPlugin {
                 new SignListener(this),
                 new TabListener(this),
                 new PlayerListener(this),
-                new ArenaListener(this)
+                new ArenaListener(this),
+                new ItemListener(this),
+                new InventoryListener(this)
         ).forEach(listener -> pluginManager.registerEvents(listener, this));
     }
 
@@ -167,5 +169,9 @@ public final class zPractice extends JavaPlugin {
 
     public TabManager getTabManager() {
         return tabManager;
+    }
+
+    public NamespacedKey getNamespacedKey() {
+        return namespacedKey;
     }
 }
