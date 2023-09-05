@@ -29,6 +29,7 @@ import com.mizuledevelopment.zpractice.util.serializer.LazyLocationTypeSerialize
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -90,7 +91,7 @@ public final class zPractice extends JavaPlugin {
                 i--;
 
                 if (i <= 0) {
-                    Bukkit.broadcast(Component.text("<red>Plugin is on testing license. - zPractice"));
+                    Bukkit.broadcast(MiniMessage.miniMessage().deserialize("<red>Plugin is on testing license. - zPractice"));
                     i = 60;
                 }
             }

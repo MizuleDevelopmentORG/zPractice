@@ -8,10 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryAction;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryMoveItemEvent;
-import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -27,19 +24,23 @@ public class InventoryListener implements Listener {
     }
 
     @EventHandler
-    public void onInteract(InventoryClickEvent event) {
-        if (event.getInventory().getType() == InventoryType.CRAFTING) {
-            if (event.getCurrentItem() == null || event.getCurrentItem().getItemMeta() == null || event.getCurrentItem().getItemMeta().displayName() == null) return;
-            if (MiniMessage.miniMessage().serialize(Objects.requireNonNull(event.getCurrentItem().getItemMeta().displayName())).equalsIgnoreCase(this.plugin
-                .getConfiguration().getConfiguration().getString("selector.name"))
-                || MiniMessage.miniMessage().serialize(Objects.requireNonNull(event.getCurrentItem().getItemMeta().displayName())).equalsIgnoreCase(this.plugin
-                .getConfiguration().getConfiguration().getString("kit.name"))
-                || MiniMessage.miniMessage().serialize(Objects.requireNonNull(event.getCurrentItem().getItemMeta().displayName())).equalsIgnoreCase(this.plugin
-                .getConfiguration().getConfiguration().getString("statistics.name"))) {
-                event.setCancelled(true);
-                Objects.requireNonNull(event.getCursor()).setType(Material.AIR);
-            }
+    public void onClick(InventoryClickEvent event) {
+        if (Objects.requireNonNull(event.getClickedInventory()).contains(Material.COMPASS)) {
+            Objects.requireNonNull(event.getCursor()).setType(Material.AIR);
+            event.setCancelled(true);
         }
+        /*
+                if (event.getCurrentItem() == null || event.getCurrentItem().getItemMeta() == null || event.getCurrentItem().getItemMeta().displayName() == null) return;
+        if (MiniMessage.miniMessage().serialize(Objects.requireNonNull(event.getCurrentItem().getItemMeta().displayName())).equalsIgnoreCase(this.plugin
+            .getConfiguration().getConfiguration().getString("selector.name"))
+            || MiniMessage.miniMessage().serialize(Objects.requireNonNull(event.getCurrentItem().getItemMeta().displayName())).equalsIgnoreCase(this.plugin
+            .getConfiguration().getConfiguration().getString("kit.name"))
+            || MiniMessage.miniMessage().serialize(Objects.requireNonNull(event.getCurrentItem().getItemMeta().displayName())).equalsIgnoreCase(this.plugin
+            .getConfiguration().getConfiguration().getString("statistics.name"))) {
+            event.setCancelled(true);
+  //          Objects.requireNonNull(event.getCursor()).setType(Material.AIR);
+        }
+         */
     }
 
     @EventHandler
