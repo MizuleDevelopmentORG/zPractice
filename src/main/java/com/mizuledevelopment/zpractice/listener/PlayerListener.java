@@ -20,7 +20,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-
+        event.joinMessage(null);
         event.getPlayer().teleport(new Location(Bukkit.getWorld(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("spawn.world"))),
             this.plugin.getConfiguration().getConfiguration().getInt("spawn.x"),
             this.plugin.getConfiguration().getConfiguration().getInt("spawn.y"),

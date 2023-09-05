@@ -28,12 +28,14 @@ import com.mizuledevelopment.zpractice.util.config.Config;
 import com.mizuledevelopment.zpractice.util.serializer.LazyLocationTypeSerializer;
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.util.Arrays;
@@ -78,6 +80,21 @@ public final class zPractice extends JavaPlugin {
         this.arenaManager.load();
 
         this.queueManager = new QueueManager();
+
+
+        new BukkitRunnable() {
+
+            int i = 60;
+            @Override
+            public void run() {
+                i--;
+
+                if (i <= 0) {
+                    Bukkit.broadcast(Component.text("<red>Plugin is on testing license. - zPractice"));
+                    i = 60;
+                }
+            }
+        }.runTaskTimer(this, 0L ,20L);
     }
 
     @Override
