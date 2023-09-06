@@ -25,22 +25,12 @@ public class InventoryListener implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {
-        if (Objects.requireNonNull(event.getClickedInventory()).contains(Material.COMPASS)) {
+        if (Objects.requireNonNull(event.getClickedInventory()).contains(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("selector.item")))
+        && event.getClickedInventory().contains(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("kit.item")))
+        && event.getClickedInventory().contains(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("statistics.item")))) {
             Objects.requireNonNull(event.getCursor()).setType(Material.AIR);
             event.setCancelled(true);
         }
-        /*
-                if (event.getCurrentItem() == null || event.getCurrentItem().getItemMeta() == null || event.getCurrentItem().getItemMeta().displayName() == null) return;
-        if (MiniMessage.miniMessage().serialize(Objects.requireNonNull(event.getCurrentItem().getItemMeta().displayName())).equalsIgnoreCase(this.plugin
-            .getConfiguration().getConfiguration().getString("selector.name"))
-            || MiniMessage.miniMessage().serialize(Objects.requireNonNull(event.getCurrentItem().getItemMeta().displayName())).equalsIgnoreCase(this.plugin
-            .getConfiguration().getConfiguration().getString("kit.name"))
-            || MiniMessage.miniMessage().serialize(Objects.requireNonNull(event.getCurrentItem().getItemMeta().displayName())).equalsIgnoreCase(this.plugin
-            .getConfiguration().getConfiguration().getString("statistics.name"))) {
-            event.setCancelled(true);
-  //          Objects.requireNonNull(event.getCursor()).setType(Material.AIR);
-        }
-         */
     }
 
     @EventHandler
