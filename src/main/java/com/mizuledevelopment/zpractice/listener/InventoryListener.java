@@ -27,6 +27,7 @@ public class InventoryListener implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {
+        if (event.getClickedInventory() == null) return;
         if (Objects.requireNonNull(event.getClickedInventory()).contains(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("selector.item")))
         && event.getClickedInventory().contains(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("kit.item")))
         && event.getClickedInventory().contains(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("statistics.item")))) {
