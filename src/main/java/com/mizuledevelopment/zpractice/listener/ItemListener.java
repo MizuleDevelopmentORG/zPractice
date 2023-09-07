@@ -74,6 +74,7 @@ public class ItemListener implements Listener {
                             this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
                                 .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
                             ItemMeta meta = itemStack.getItemMeta();
+                            meta.getPersistentDataContainer().set(this.plugin.getEditorKey(), PersistentDataType.INTEGER, this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".editor"));
                             meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.items." + items + ".name")
                                 , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.items." + items + ".name")))));
                             List<Component> lore = new ArrayList<>();
@@ -96,6 +97,13 @@ public class ItemListener implements Listener {
                                 ItemMeta meta = itemStack.getItemMeta();
                                 meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
                                     , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
+                                if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 1) {
+                                    meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 1);
+                                } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 2) {
+                                    meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 2);
+                                } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 3) {
+                                    meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 3);
+                                }
                                 List<Component> lore = new ArrayList<>();
                                 for (String string : this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".lore")) {
                                     if (string.isEmpty()) {
@@ -115,6 +123,15 @@ public class ItemListener implements Listener {
                                         this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
                                             .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
                                         ItemMeta meta = itemStack.getItemMeta();
+                                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
+                                            , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
+                                        if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 1) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 1);
+                                        } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 2) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 2);
+                                        } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 3) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 3);
+                                        }
                                         meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-name")
                                             , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-name")))));
                                         List<Component> lore = new ArrayList<>();
@@ -134,6 +151,15 @@ public class ItemListener implements Listener {
                                         this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
                                             .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
                                         ItemMeta meta = itemStack.getItemMeta();
+                                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
+                                            , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
+                                        if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 1) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 1);
+                                        } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 2) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 2);
+                                        } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 3) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 3);
+                                        }
                                         meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
                                             , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
                                         List<Component> lore = new ArrayList<>();
@@ -157,6 +183,15 @@ public class ItemListener implements Listener {
                                         this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
                                             .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
                                         ItemMeta meta = itemStack.getItemMeta();
+                                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
+                                            , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
+                                        if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 1) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 1);
+                                        } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 2) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 2);
+                                        } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 3) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 3);
+                                        }
                                         meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-name")
                                             , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-name")))));
                                         List<Component> lore = new ArrayList<>();
@@ -176,6 +211,15 @@ public class ItemListener implements Listener {
                                         this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
                                             .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
                                         ItemMeta meta = itemStack.getItemMeta();
+                                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
+                                            , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
+                                        if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 1) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 1);
+                                        } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 2) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 2);
+                                        } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 3) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 3);
+                                        }
                                         meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
                                             , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
                                         List<Component> lore = new ArrayList<>();
@@ -199,6 +243,15 @@ public class ItemListener implements Listener {
                                         this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
                                             .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
                                         ItemMeta meta = itemStack.getItemMeta();
+                                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
+                                            , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
+                                        if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 1) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 1);
+                                        } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 2) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 2);
+                                        } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 3) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 3);
+                                        }
                                         meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-name")
                                             , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-name")))));
                                         List<Component> lore = new ArrayList<>();
@@ -218,6 +271,15 @@ public class ItemListener implements Listener {
                                         this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
                                             .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
                                         ItemMeta meta = itemStack.getItemMeta();
+                                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
+                                            , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
+                                        if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 1) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 1);
+                                        } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 2) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 2);
+                                        } else if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 3) {
+                                            meta.getPersistentDataContainer().set(this.plugin.getKitKey(), PersistentDataType.INTEGER, 3);
+                                        }
                                         meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
                                             , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
                                         List<Component> lore = new ArrayList<>();

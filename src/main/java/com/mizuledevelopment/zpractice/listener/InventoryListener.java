@@ -11,7 +11,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Objects;
 
@@ -37,15 +39,16 @@ public class InventoryListener implements Listener {
     public void onInventory(InventoryClickEvent event) {
 
         if (MiniMessage.miniMessage().serialize(event.getView().title()).equalsIgnoreCase(this.plugin.getConfiguration().getConfiguration().getString("inventory.selector.title"))
-        || MiniMessage.miniMessage().serialize(event.getView().title()).equalsIgnoreCase(this.plugin.getConfiguration().getConfiguration().getString("inventory.statistics.title"))
-        || MiniMessage.miniMessage().serialize(event.getView().title()).equalsIgnoreCase(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.title"))) {
+            || MiniMessage.miniMessage().serialize(event.getView().title()).equalsIgnoreCase(this.plugin.getConfiguration().getConfiguration().getString("inventory.statistics.title"))
+            || MiniMessage.miniMessage().serialize(event.getView().title()).equalsIgnoreCase(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.title"))) {
             event.setCancelled(true);
         }
 
         Player player = (Player) event.getWhoClicked();
 
         for (final String items : Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getConfigurationSection("inventory.selector.items")).getKeys(false)) {
-            if (event.getCurrentItem() == null || event.getCurrentItem().getItemMeta() == null || event.getCurrentItem().getItemMeta().displayName() == null) return;
+            if (event.getCurrentItem() == null || event.getCurrentItem().getItemMeta() == null || event.getCurrentItem().getItemMeta().displayName() == null)
+                return;
             if (MiniMessage.miniMessage().serialize(Objects.requireNonNull(event.getCurrentItem().getItemMeta().displayName()))
                 .equalsIgnoreCase(this.plugin.getConfiguration().getConfiguration().getString("inventory.selector.items." + items + ".name"))) {
 
@@ -57,14 +60,21 @@ public class InventoryListener implements Listener {
             }
         }
 
-        for (final String items : Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getConfigurationSection("inventory.kit.items")).getKeys(false)) {
-            if (event.getCurrentItem() == null || event.getCurrentItem().getItemMeta() == null || event.getCurrentItem().getItemMeta().displayName() == null) return;
-            if (MiniMessage.miniMessage().serialize(Objects.requireNonNull(event.getCurrentItem().getItemMeta().displayName()))
-                .equalsIgnoreCase(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.items." + items + ".name"))) {
-                if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") != 0) {
-                    this.plugin.getProfileManager().get(player.getUniqueId()).setSelectedKit(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kits.items" + items + ".kit"));
-                }
+        if (event.getCurrentItem() == null || event.getCurrentItem().getItemMeta() == null || event.getCurrentItem().getItemMeta().displayName() == null) return;
+        if (event.getCurrentItem().getItemMeta().getPersistentDataContainer().has(this.plugin.getKitKey())) {
+            int value = event.getCurrentItem().getItemMeta().getPersistentDataContainer().get(this.plugin.getKitKey(), PersistentDataType.INTEGER);
+
+            if (value == 1) {
+                this.plugin.getProfileManager().get(player.getUniqueId()).setSelectedKit(1);
+            } else if (value == 2) {
+                this.plugin.getProfileManager().get(player.getUniqueId()).setSelectedKit(2);
+            } else if (value == 3) {
+                this.plugin.getProfileManager().get(player.getUniqueId()).setSelectedKit(3);
             }
+            player.closeInventory();
+        } else if (event.getCurrentItem().getItemMeta().getPersistentDataContainer().has(this.plugin.getEditorKey())) {
+
         }
     }
 }
+

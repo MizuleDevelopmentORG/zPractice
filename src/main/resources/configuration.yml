@@ -98,6 +98,7 @@ inventory:
           - ""
         amount: 1
         slot: 1
+        editor: 1
       2:
         item: "BOOK"
         name: "<red>Kit 2"
@@ -109,6 +110,7 @@ inventory:
           - ""
         amount: 1
         slot: 2
+        editor: 2
       3:
         item: "BOOK"
         name: "<red>Kit 3"
@@ -120,6 +122,7 @@ inventory:
           - ""
         amount: 1
         slot: 3
+        editor: 3
       4:
         item: "null"
         name: "<red>Click to "
@@ -176,7 +179,10 @@ inventory:
         amount: 1
         slot: 1
 
-#kit-inventory:
+editor:
+  inventory:
+    title: ""
+    size: 54
 
 selection:
   selected-item: "LIME_WOOL"

@@ -44,6 +44,8 @@ import java.util.Arrays;
 public final class zPractice extends JavaPlugin {
 
     private final NamespacedKey namespacedKey = new NamespacedKey(this, "type");
+    private final NamespacedKey kitKey = new NamespacedKey(this, "key");
+    private final NamespacedKey editorKey =new NamespacedKey(this, "editor");
     private Config configuration;
     private Config messages;
     private TabManager tabManager;
@@ -192,5 +194,13 @@ public final class zPractice extends JavaPlugin {
 
     public NamespacedKey getNamespacedKey() {
         return namespacedKey;
+    }
+
+    public NamespacedKey getKitKey() {
+        return kitKey;
+    }
+
+    public NamespacedKey getEditorKey() {
+        return editorKey;
     }
 }
