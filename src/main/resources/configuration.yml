@@ -88,16 +88,74 @@ inventory:
     size: 54
     items:
       1:
-        item: "DIAMOND_SWORD"
-        name: "<red>Test Kit"
+        item: "BOOK"
+        name: "<red>Kit 1"
         enchantments:
           - "DURABILITY:10"
         lore:
-          - "<red>test"
-          - "<red>test"
+          - "<red>test 1"
+          - "<red>test 1"
           - ""
         amount: 1
         slot: 1
+      2:
+        item: "BOOK"
+        name: "<red>Kit 2"
+        enchantments:
+          - "DURABILITY:10"
+        lore:
+          - "<red>test 2"
+          - "<red>test 2"
+          - ""
+        amount: 1
+        slot: 2
+      3:
+        item: "BOOK"
+        name: "<red>Kit 3"
+        enchantments:
+          - "DURABILITY:10"
+        lore:
+          - "<red>test 3"
+          - "<red>test 3"
+          - ""
+        amount: 1
+        slot: 3
+      4:
+        item: "null"
+        name: "<red>Click to "
+        enchantments:
+          - "DURABILITY:10"
+        lore:
+          - "<red>test 1"
+          - "<red>test 1"
+          - ""
+        amount: 1
+        slot: 10
+        kit: 1
+      5:
+        item: "null"
+        name: "<red>Kit 2"
+        enchantments:
+          - "DURABILITY:10"
+        lore:
+          - "<red>test 2"
+          - "<red>test 2"
+          - ""
+        amount: 1
+        slot: 11
+        kit: 2
+      6:
+        item: "null"
+        name: "<red>Kit 3"
+        enchantments:
+          - "DURABILITY:10"
+        lore:
+          - "<red>test 3"
+          - "<red>test 3"
+          - ""
+        amount: 1
+        slot: 12
+        kit: 3
   statistics:
     title: "<red>Statistics Inventory"
     size: 54
@@ -117,6 +175,14 @@ inventory:
           - ""
         amount: 1
         slot: 1
+
+#kit-inventory:
+
+selection:
+  selected-item: "LIME_WOOL"
+  unselected-item: "GRAY_WOOL"
+  selected-name: "<green>Selected"
+  unselected-name: "<red>Not Selected"
 
 sign-format:
   - "%name%"

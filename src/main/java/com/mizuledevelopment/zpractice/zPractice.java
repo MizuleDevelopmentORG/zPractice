@@ -11,6 +11,7 @@ import com.mizuledevelopment.zpractice.arena.manager.ArenaManager;
 import com.mizuledevelopment.zpractice.kit.command.KitCreateCommand;
 import com.mizuledevelopment.zpractice.kit.command.KitDeleteCommand;
 import com.mizuledevelopment.zpractice.kit.command.KitSetItemsCommand;
+import com.mizuledevelopment.zpractice.kit.listener.KitListener;
 import com.mizuledevelopment.zpractice.kit.manager.KitManager;
 import com.mizuledevelopment.zpractice.listener.*;
 import com.mizuledevelopment.zpractice.mongo.MongoHandler;
@@ -28,7 +29,6 @@ import com.mizuledevelopment.zpractice.util.config.Config;
 import com.mizuledevelopment.zpractice.util.serializer.LazyLocationTypeSerializer;
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Bukkit;
@@ -123,7 +123,8 @@ public final class zPractice extends JavaPlugin {
                 new PlayerListener(this),
                 new ArenaListener(this),
                 new ItemListener(this),
-                new InventoryListener(this)
+                new InventoryListener(this),
+                new KitListener(this)
         ).forEach(listener -> pluginManager.registerEvents(listener, this));
     }
 

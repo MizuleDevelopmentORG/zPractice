@@ -37,7 +37,6 @@ public class KitManager {
     }
 
 
-
     public Kit get(String name) {
         for (Kit kit : kits) {
             if (kit.getName().equalsIgnoreCase(name)) {

@@ -56,5 +56,15 @@ public class InventoryListener implements Listener {
                     this.plugin.getConfiguration().getConfiguration().getInt("inventory.selector.items." + items + ".spawn-z")));
             }
         }
+
+        for (final String items : Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getConfigurationSection("inventory.kit.items")).getKeys(false)) {
+            if (event.getCurrentItem() == null || event.getCurrentItem().getItemMeta() == null || event.getCurrentItem().getItemMeta().displayName() == null) return;
+            if (MiniMessage.miniMessage().serialize(Objects.requireNonNull(event.getCurrentItem().getItemMeta().displayName()))
+                .equalsIgnoreCase(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.items." + items + ".name"))) {
+                if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") != 0) {
+                    this.plugin.getProfileManager().get(player.getUniqueId()).setSelectedKit(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kits.items" + items + ".kit"));
+                }
+            }
+        }
     }
 }

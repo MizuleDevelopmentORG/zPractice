@@ -68,24 +68,173 @@ public class ItemListener implements Listener {
                     Inventory inventory = Bukkit.createInventory(event.getPlayer(), this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.size"),
                         TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.title"), MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("inventory.selector.title")))));
                     for (final String items : Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getConfigurationSection("inventory.kit.items")).getKeys(false)) {
-                        ItemStack itemStack = new ItemStack(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.items." + items + ".item")));
-                        itemStack.setAmount(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".amount"));
-                        this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
-                            .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
-                        ItemMeta meta = itemStack.getItemMeta();
-                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.items." + items + ".name")
-                            ,MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.items." + items + ".name")))));
-                        List<Component> lore = new ArrayList<>();
-                        for (String string : this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".lore")) {
-                            if (string.isEmpty()) {
-                                lore.add(Component.text(" "));
-                            } else {
-                                lore.add(TextUtil.parse(string, MessageType.from(string)));
+                        if (!Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.items." + items + ".item")).equalsIgnoreCase("null")) {
+                            ItemStack itemStack = new ItemStack(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.items." + items + ".item")));
+                            itemStack.setAmount(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".amount"));
+                            this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
+                                .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
+                            ItemMeta meta = itemStack.getItemMeta();
+                            meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.items." + items + ".name")
+                                , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("inventory.kit.items." + items + ".name")))));
+                            List<Component> lore = new ArrayList<>();
+                            for (String string : this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".lore")) {
+                                if (string.isEmpty()) {
+                                    lore.add(Component.text(" "));
+                                } else {
+                                    lore.add(TextUtil.parse(string, MessageType.from(string)));
+                                }
+                            }
+                            meta.lore(lore);
+                            itemStack.setItemMeta(meta);
+                            inventory.setItem(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".slot"), itemStack);
+                        } else {
+                            if (this.plugin.getProfileManager().get(event.getPlayer().getUniqueId()).getSelectedKit() == 0) {
+                                ItemStack itemStack = new ItemStack(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-item")));
+                                itemStack.setAmount(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".amount"));
+                                this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
+                                    .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
+                                ItemMeta meta = itemStack.getItemMeta();
+                                meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
+                                    , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
+                                List<Component> lore = new ArrayList<>();
+                                for (String string : this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".lore")) {
+                                    if (string.isEmpty()) {
+                                        lore.add(Component.text(" "));
+                                    } else {
+                                        lore.add(TextUtil.parse(string, MessageType.from(string)));
+                                    }
+                                }
+                                meta.lore(lore);
+                                itemStack.setItemMeta(meta);
+                                inventory.setItem(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".slot"), itemStack);
+                            } else if (this.plugin.getProfileManager().get(event.getPlayer().getUniqueId()).getSelectedKit() == 1) {
+                                if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") != 0) {
+                                    if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 1) {
+                                        ItemStack itemStack = new ItemStack(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-item")));
+                                        itemStack.setAmount(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".amount"));
+                                        this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
+                                            .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
+                                        ItemMeta meta = itemStack.getItemMeta();
+                                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-name")
+                                            , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-name")))));
+                                        List<Component> lore = new ArrayList<>();
+                                        for (String string : this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".lore")) {
+                                            if (string.isEmpty()) {
+                                                lore.add(Component.text(" "));
+                                            } else {
+                                                lore.add(TextUtil.parse(string, MessageType.from(string)));
+                                            }
+                                        }
+                                        meta.lore(lore);
+                                        itemStack.setItemMeta(meta);
+                                        inventory.setItem(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".slot"), itemStack);
+                                    } else {
+                                        ItemStack itemStack = new ItemStack(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-item")));
+                                        itemStack.setAmount(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".amount"));
+                                        this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
+                                            .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
+                                        ItemMeta meta = itemStack.getItemMeta();
+                                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
+                                            , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
+                                        List<Component> lore = new ArrayList<>();
+                                        for (String string : this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".lore")) {
+                                            if (string.isEmpty()) {
+                                                lore.add(Component.text(" "));
+                                            } else {
+                                                lore.add(TextUtil.parse(string, MessageType.from(string)));
+                                            }
+                                        }
+                                        meta.lore(lore);
+                                        itemStack.setItemMeta(meta);
+                                        inventory.setItem(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".slot"), itemStack);
+                                    }
+                                }
+                            } else if (this.plugin.getProfileManager().get(event.getPlayer().getUniqueId()).getSelectedKit() == 2) {
+                                if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") != 0) {
+                                    if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 2) {
+                                        ItemStack itemStack = new ItemStack(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-item")));
+                                        itemStack.setAmount(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".amount"));
+                                        this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
+                                            .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
+                                        ItemMeta meta = itemStack.getItemMeta();
+                                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-name")
+                                            , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-name")))));
+                                        List<Component> lore = new ArrayList<>();
+                                        for (String string : this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".lore")) {
+                                            if (string.isEmpty()) {
+                                                lore.add(Component.text(" "));
+                                            } else {
+                                                lore.add(TextUtil.parse(string, MessageType.from(string)));
+                                            }
+                                        }
+                                        meta.lore(lore);
+                                        itemStack.setItemMeta(meta);
+                                        inventory.setItem(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".slot"), itemStack);
+                                    } else {
+                                        ItemStack itemStack = new ItemStack(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-item")));
+                                        itemStack.setAmount(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".amount"));
+                                        this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
+                                            .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
+                                        ItemMeta meta = itemStack.getItemMeta();
+                                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
+                                            , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
+                                        List<Component> lore = new ArrayList<>();
+                                        for (String string : this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".lore")) {
+                                            if (string.isEmpty()) {
+                                                lore.add(Component.text(" "));
+                                            } else {
+                                                lore.add(TextUtil.parse(string, MessageType.from(string)));
+                                            }
+                                        }
+                                        meta.lore(lore);
+                                        itemStack.setItemMeta(meta);
+                                        inventory.setItem(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".slot"), itemStack);
+                                    }
+                                }
+                            } else if (this.plugin.getProfileManager().get(event.getPlayer().getUniqueId()).getSelectedKit() == 3) {
+                                if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") != 0) {
+                                    if (this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".kit") == 3) {
+                                        ItemStack itemStack = new ItemStack(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-item")));
+                                        itemStack.setAmount(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".amount"));
+                                        this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
+                                            .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
+                                        ItemMeta meta = itemStack.getItemMeta();
+                                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-name")
+                                            , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.selected-name")))));
+                                        List<Component> lore = new ArrayList<>();
+                                        for (String string : this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".lore")) {
+                                            if (string.isEmpty()) {
+                                                lore.add(Component.text(" "));
+                                            } else {
+                                                lore.add(TextUtil.parse(string, MessageType.from(string)));
+                                            }
+                                        }
+                                        meta.lore(lore);
+                                        itemStack.setItemMeta(meta);
+                                        inventory.setItem(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".slot"), itemStack);
+                                    } else {
+                                        ItemStack itemStack = new ItemStack(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-item")));
+                                        itemStack.setAmount(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".amount"));
+                                        this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".enchantments")
+                                            .forEach(enchantment -> itemStack.addUnsafeEnchantment(Objects.requireNonNull(Enchantment.getByName(enchantment.split(":")[0])), Integer.parseInt(enchantment.split(":")[1])));
+                                        ItemMeta meta = itemStack.getItemMeta();
+                                        meta.displayName(TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")
+                                            , MessageType.from(Objects.requireNonNull(this.plugin.getConfiguration().getConfiguration().getString("selection.unselected-name")))));
+                                        List<Component> lore = new ArrayList<>();
+                                        for (String string : this.plugin.getConfiguration().getConfiguration().getStringList("inventory.kit.items." + items + ".lore")) {
+                                            if (string.isEmpty()) {
+                                                lore.add(Component.text(" "));
+                                            } else {
+                                                lore.add(TextUtil.parse(string, MessageType.from(string)));
+                                            }
+                                        }
+                                        meta.lore(lore);
+                                        itemStack.setItemMeta(meta);
+                                        inventory.setItem(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".slot"), itemStack);
+                                    }
+                                }
                             }
                         }
-                        meta.lore(lore);
-                        itemStack.setItemMeta(meta);
-                        inventory.setItem(this.plugin.getConfiguration().getConfiguration().getInt("inventory.kit.items." + items + ".slot"), itemStack);
                     }
 
                     event.getPlayer().openInventory(inventory);

@@ -16,7 +16,8 @@ public class ProfileHelper {
                         document.getInteger("loses"),
                         document.getList("items1", String.class),
                         document.getList("items2", String.class),
-                        document.getList("items3", String.class));
+                        document.getList("items3", String.class),
+                        document.getInteger("selected"));
     }
 
     public static Document from(Profile profile) {
@@ -29,6 +30,7 @@ public class ProfileHelper {
         document.put("items1", profile.getItems1());
         document.put("items2", profile.getItems2());
         document.put("items3", profile.getItems3());
+        document.put("selected", profile.getSelectedKit());
         return document;
     }
 }

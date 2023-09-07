@@ -11,6 +11,7 @@ public class Profile {
     private int deaths;
     private int wins;
     private int loses;
+    private int selectedKit;
     private List<String> items1;
     private List<String> items2;
     private List<String> items3;
@@ -23,7 +24,8 @@ public class Profile {
         int loses,
         List<String> items1,
         List<String> items2,
-        List<String> items3
+        List<String> items3,
+        int selectedKit
     ) {
         this.uuid = uuid;
         this.kills = kills;
@@ -33,6 +35,7 @@ public class Profile {
         this.items1 = items1;
         this.items2 = items2;
         this.items3 = items3;
+        this.selectedKit = selectedKit;
     }
 
     public String getUuid() {
@@ -75,6 +78,10 @@ public class Profile {
         this.kills = kills;
     }
 
+    public int getSelectedKit() {
+        return selectedKit;
+    }
+
     public void setLoses(final int loses) {
         this.loses = loses;
     }
@@ -93,6 +100,10 @@ public class Profile {
 
     public void setItems3(final List<String> items3) {
         this.items3 = items3;
+    }
+
+    public void setSelectedKit(final int selectedKit) {
+        this.selectedKit = selectedKit;
     }
 }
 
