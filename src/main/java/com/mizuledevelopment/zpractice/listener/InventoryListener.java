@@ -1,5 +1,8 @@
 package com.mizuledevelopment.zpractice.listener;
 
+import com.mizuledevelopment.zpractice.util.color.MessageType;
+import com.mizuledevelopment.zpractice.util.color.TextUtil;
+import com.mizuledevelopment.zpractice.util.serializer.ItemStackSerializer;
 import com.mizuledevelopment.zpractice.zPractice;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
@@ -13,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Objects;
@@ -74,7 +78,31 @@ public class InventoryListener implements Listener {
             }
             player.closeInventory();
         } else if (event.getCurrentItem().getItemMeta().getPersistentDataContainer().has(this.plugin.getEditorKey())) {
+            int key = event.getCurrentItem().getItemMeta().getPersistentDataContainer().get(this.plugin.getEditorKey(), PersistentDataType.INTEGER);
+            Inventory inventory = Bukkit.createInventory(player, this.plugin.getConfiguration().getConfiguration().getInt("editor.inventory.size"),
+                TextUtil.parse(this.plugin.getConfiguration().getConfiguration().getString("editor.inventory.title"),
+                    MessageType.from(this.plugin.getConfiguration().getConfiguration().getString("editor.inventory.title"))));
+            if (key == 1) {
+                for (final String hotbar : this.plugin.getConfiguration().getConfiguration().getStringList("editor.hotbar")) {
+                    if (this.plugin.getProfileManager().get(player.getUniqueId()).getItems1Bar() != null
+                    && !this.plugin.getProfileManager().get(player.getUniqueId()).getItems1Bar().isEmpty()) {
+                        for (final String string : this.plugin.getProfileManager().get(player.getUniqueId()).getItems1Bar()) {
+                            if (string != null) {
+                                inventory.setItem(Integer.parseInt(hotbar), ItemStackSerializer.deSerialize(string));
+                            }
+                        }
+                    }
 
+
+                    ItemStack itemStack = new ItemStack(Material.valueOf(this.plugin.getConfiguration().getConfiguration().getString("editor.hotbar-item")));
+                    ItemMeta meta = itemStack.getItemMeta();
+                    meta.displayName(MiniMessage.miniMessage().deserialize(this.plugin.getConfiguration().getConfiguration().getString("editor.hotbar-name")));
+                    itemStack.setItemMeta(meta);
+                    inventory.setItem(Integer.parseInt(hotbar), itemStack);
+                }
+            }
+
+            player.openInventory(inventory);
         }
     }
 }

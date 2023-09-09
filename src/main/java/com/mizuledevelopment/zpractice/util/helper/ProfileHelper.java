@@ -17,6 +17,12 @@ public class ProfileHelper {
                         document.getList("items1", String.class),
                         document.getList("items2", String.class),
                         document.getList("items3", String.class),
+                        document.getList("armor1", String.class),
+                        document.getList("armor2", String.class),
+                        document.getList("armor3", String.class),
+                        document.getList("bar1", String.class),
+                        document.getList("bar2", String.class),
+                        document.getList("bar3", String.class),
                         document.getInteger("selected"));
     }
 
@@ -30,6 +36,12 @@ public class ProfileHelper {
         document.put("items1", profile.getItems1());
         document.put("items2", profile.getItems2());
         document.put("items3", profile.getItems3());
+        document.put("armor1", profile.getItems1Armor());
+        document.put("armor2", profile.getItems2Armor());
+        document.put("armor3", profile.getItems3Armor());
+        document.put("bar1", profile.getItems1Bar());
+        document.put("bar2", profile.getItems2Bar());
+        document.put("bar3", profile.getItems3Bar());
         document.put("selected", profile.getSelectedKit());
         return document;
     }

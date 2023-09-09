@@ -8,7 +8,6 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ReplaceOptions;
 import org.bson.Document;
-import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -52,7 +51,7 @@ public class ProfileManager {
     }
 
     public void createProfile(final String uuid) {
-        this.profiles.add(new Profile(uuid, 0, 0, 0, 0, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 0));
+        this.profiles.add(new Profile(uuid, 0, 0, 0, 0, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 1));
     }
 
     public Profile get(UUID uuid) {
